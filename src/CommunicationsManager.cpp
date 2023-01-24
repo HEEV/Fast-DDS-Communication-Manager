@@ -1,0 +1,204 @@
+#include "CommunicationManager.h"
+#include <istream>
+#include <chrono>
+#include <iostream>
+#include <algorithm>
+#include <fmt/format.h>
+#include "PacketTypes/header.h"
+
+using namespace eprosima::fastdds::dds;
+using namespace eprosima::fastdds;
+using namespace eprosima::fastrtps::rtps;
+using namespace eprosima::fastrtps::types;
+using namespace eprosima::fastrtps;
+
+CommunicationManager::CommunicationManager(std::string_view hostname, bool isServer)
+{
+    if(isServer)
+        _participant = _createServerParticipant(hostname);
+    else
+        _participant = _createClientParticipant(hostname);
+
+    _publisher = _participant->create_publisher(PUBLISHER_QOS_DEFAULT);
+    _subscriber = _participant->create_subscriber(SUBSCRIBER_QOS_DEFAULT);
+    _readerFree = true;
+    _callbackFree = true;
+    _run = true;
+    _readerThread = std::thread(&CommunicationManager::_dataRecievedHandler, this);
+
+}
+
+CommunicationManager::~CommunicationManager()
+{
+    shutdown();
+    _readerThread.join();
+
+    for(const auto [name, topic] : _topics)
+        _participant->delete_topic(topic);
+
+    for(const auto i : _writers)
+        _publisher->delete_datawriter(i);
+
+    for(const auto i : _readers)
+        _subscriber->delete_datareader(i);
+
+    _publisher->delete_contained_entities();
+    _participant->delete_publisher(_publisher);
+
+    _subscriber->delete_contained_entities();
+    _participant->delete_subscriber(_subscriber);
+
+    if(_participant->delete_contained_entities() != ReturnCode_t::RETCODE_OK)
+        return;
+
+    DomainParticipantFactory::get_instance()->delete_participant(_participant);
+}
+
+int CommunicationManager::addDataWriter(std::string topicName)
+{
+    const auto& topic = _topics.at(topicName);
+    auto* writer = _publisher->create_datawriter(topic, DATAWRITER_QOS_DEFAULT);
+    _writers.push_back(writer);
+    return _writers.size() - 1;
+}
+
+void CommunicationManager::writeData(int dataWriterID, void* data)
+{
+    auto now = std::chrono::system_clock::now();
+    auto nowMS = std::chrono::time_point_cast<std::chrono::milliseconds>(now);
+    auto epoch = nowMS.time_since_epoch();
+
+    ((Header*)data)->timeSent(std::chrono::duration_cast<std::chrono::milliseconds>(epoch).count());
+
+    _writers[dataWriterID]->write(data, eprosima::fastrtps::rtps::InstanceHandle_t());
+}
+
+void CommunicationManager::shutdown()
+{
+    _run = false;
+}
+
+void CommunicationManager::_dataRecievedHandler()
+{
+    using namespace std::chrono_literals;
+
+    SampleInfo info;
+    std::byte data[100];
+    eprosima::fastrtps::Duration_t timeout (0, 50000000);
+    while(_run)
+    {
+        std::unique_lock readerLock(_readerMux);
+        _readerCV.wait(readerLock, [this](){ return _readerFree; });
+        _readerFree = false;
+        for(int i = 0; i < _readers.size(); i++)
+        {
+            ConditionSeq conditions;
+            if(_waitSets[i]->wait(conditions, timeout) == ReturnCode_t::RETCODE_OK)
+            {
+                while(_readers[i]->read_next_sample(data, &info) == ReturnCode_t::RETCODE_OK)
+                {
+                    const std::string& name = _readers[i]->get_topicdescription()->get_name();
+
+                    std::unique_lock callbackLock(_callbackMux);
+                    _callbackCV.wait(callbackLock,[this](){ return _callbackFree; });
+                    _callbackFree = false;
+                    auto& callbacks = _callbacks.at(name);
+                    for(auto& c : callbacks)
+                        c(data);
+                    _callbackFree = true;
+                    callbackLock.unlock();
+                    _callbackCV.notify_all();
+                }
+            }
+        }
+        _readerFree = true;
+        readerLock.unlock();
+        _readerCV.notify_all();
+        // Give time for resources to be added
+        std::this_thread::sleep_for(50ms);
+    }
+}
+
+eprosima::fastdds::dds::DomainParticipant *CommunicationManager::_createServerParticipant(std::string_view hostname)
+{
+    // Get default participant QoS
+    DomainParticipantQos server_qos = PARTICIPANT_QOS_DEFAULT;
+
+    // Set participant as SERVER
+    server_qos.wire_protocol().builtin.discovery_config.discoveryProtocol =
+            DiscoveryProtocol_t::SERVER;
+
+    // Set SERVER's GUID prefix
+    std::istringstream("44.53.00.5f.45.50.52.4f.53.49.4d.41") >> server_qos.wire_protocol().prefix;
+
+    // Set SERVER's listening locator for PDP
+    IPData data = _parseIP(hostname);
+    Locator_t locator;
+    IPLocator::setIPv4(locator, data.ip);
+    locator.port = data.port;
+    server_qos.wire_protocol().builtin.metatrafficUnicastLocatorList.push_back(locator);
+    server_qos.wire_protocol().builtin.typelookup_config.use_client = true;
+    server_qos.wire_protocol().builtin.typelookup_config.use_server = true;
+    
+    return DomainParticipantFactory::get_instance()->create_participant(0, server_qos);
+}
+
+eprosima::fastdds::dds::DomainParticipant *CommunicationManager::_createClientParticipant(std::string_view hostname)
+{
+        // Get default participant QoS
+    DomainParticipantQos client_qos = PARTICIPANT_QOS_DEFAULT;
+
+    // Set participant as CLIENT
+    client_qos.wire_protocol().builtin.discovery_config.discoveryProtocol =
+            DiscoveryProtocol_t::CLIENT;
+
+    // Set SERVER's GUID prefix
+    RemoteServerAttributes remote_server_att;
+    remote_server_att.ReadguidPrefix("44.53.00.5f.45.50.52.4f.53.49.4d.41");
+
+    // Set SERVER's listening locator for PDP
+    IPData data = _parseIP(hostname);
+    Locator_t locator;
+    IPLocator::setIPv4(locator, data.ip);
+    locator.port = data.port;
+    remote_server_att.metatrafficUnicastLocatorList.push_back(locator);
+
+    // Add remote SERVER to CLIENT's list of SERVERs
+    client_qos.wire_protocol().builtin.discovery_config.m_DiscoveryServers.push_back(remote_server_att);
+
+    // Set ping period to 250 ms
+    client_qos.wire_protocol().builtin.discovery_config.discoveryServer_client_syncperiod =
+            eprosima::fastrtps::Duration_t(0, 250000000);
+
+    client_qos.wire_protocol().builtin.typelookup_config.use_client = true;
+    client_qos.wire_protocol().builtin.typelookup_config.use_server = true;
+
+    // Create CLIENT
+    return DomainParticipantFactory::get_instance()->create_participant(0, client_qos);
+}
+
+CommunicationManager::IPData CommunicationManager::_parseIP(std::string_view hostname)
+{
+    // Lib uses const std::string&. This prevents redundent copies
+    size_t portSeperator = hostname.find(":");
+    if(portSeperator == std::string_view::npos)
+        throw HostnameException("No port given. The port must come at the end of the hostname, seperated by a ':'");
+    std::string name(hostname.begin(), hostname.begin() + portSeperator);
+    std::string portStr(hostname.begin() + portSeperator + 1, hostname.end());
+
+    bool isURL = !IPLocator::isIPv4(name);
+    IPData data;
+    if(isURL)
+    {
+        auto response = IPLocator::resolveNameDNS(name);
+        if(response.first.size() > 0)
+            data.ip = response.first.begin()->data();
+        else
+            throw HostnameException("Could not resolve hostname " + name);
+    }
+    else
+        data.ip = name;
+    data.port = std::stoi(portStr);
+
+    return data;
+}

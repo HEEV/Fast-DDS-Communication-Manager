@@ -1,0 +1,9 @@
+[submodule "lib/Fast-DDS"]
+	path = lib/Fast-DDS
+	url = git@github.com:eProsima/Fast-DDS.git
+[submodule "lib/fmt"]
+	path = lib/fmt
+	url = git@github.com:fmtlib/fmt.git
+[submodule "lib/memory"]
+	path = lib/memory
+	url = git@github.com:foonathan/memory.git
