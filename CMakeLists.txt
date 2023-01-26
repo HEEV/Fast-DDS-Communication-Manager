@@ -16,4 +16,4 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 add_subdirectory(lib)
 add_subdirectory(src)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE fmt fastrtps)
+target_link_libraries(${PROJECT_NAME} PUBLIC fmt fastrtps)
