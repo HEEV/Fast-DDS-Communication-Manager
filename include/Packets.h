@@ -1,0 +1,9 @@
+#pragma once
+#include "PacketTypes/batteryVoltage.h"
+#include "PacketTypes/batteryVoltagePubSubTypes.h"
+#include "PacketTypes/header.h"
+#include "PacketTypes/headerPubSubTypes.h"
+#include "PacketTypes/velocity.h"
+#include "PacketTypes/velocityPubSubTypes.h"
+#include "PacketTypes/windSpeed.h"
+#include "PacketTypes/windSpeedPubSubTypes.h"

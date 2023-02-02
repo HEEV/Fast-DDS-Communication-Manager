@@ -1,0 +1,7 @@
+struct Header;
+
+struct windSpeed
+{
+    Header head;
+    float headSpeed;
+};

@@ -1,0 +1,7 @@
+struct Header;
+
+struct Velocity
+{
+    Header head;
+    float magnitude;
+};

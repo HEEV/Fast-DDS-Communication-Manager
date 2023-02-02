@@ -1,0 +1,46 @@
+#!/bin/bash
+
+dir="`dirname \"$0\"`"
+
+java -version &>/dev/null
+
+if [ $? != 0 ]; then
+    [ -z "$JAVA_HOME" ] && { echo "Java binary cannot be found. Please, make sure its location is in the PATH environment variable or set JAVA_HOME environment variable."; exit 1; }
+    java_exec="${JAVA_HOME}/bin/java"
+fi
+mkdir -p "$dir/output"
+files=("$dir/../PacketTypes/*")
+java -jar "$dir/java/fastddsgen.jar" -d "$dir/output" -ppDisable $files
+
+headers=("$dir/output/*.h")
+headersNames=($(basename -a ${headers}))
+srcs=("$dir/output/*.cxx")
+srcsNames=($(basename -a ${srcs}))
+
+for file in ${srcs[@]}; do
+    sed -i 's-#include "-#include "PacketTypes/-g' $file
+done
+
+rm -rf "$dir/../include/PacketTypes/"
+rm -rf "$dir/../src/PacketTypes/"
+mkdir -p "$dir/../include/PacketTypes/"
+mkdir -p "$dir/../src/PacketTypes/"
+mv -f $headers "$dir/../include/PacketTypes"
+mv -f $srcs "$dir/../src/PacketTypes"
+
+headersRel="${headersNames[@]/#/PacketTypes/}"
+rm "$dir/../include/Packets.h"
+for i in ${headersRel[@]}; do
+    echo "#include \"$i\"" >> "$dir/../include/Packets.h"
+done
+
+echo "target_sources(\${PROJECT_NAME} PRIVATE" >> "$dir/../src/PacketTypes/CMakeLists.txt"
+for i in ${srcsNames[@]}; do
+    echo "$i" >> "$dir/../src/PacketTypes/CMakeLists.txt"
+done
+echo ")" >> "$dir/../src/PacketTypes/CMakeLists.txt"
+
+echo "#pragma once" > "$dir/../include/Packets.h"
+for file in ${headersNames[@]}; do
+    echo "#include \"PacketTypes/$file\"" >> "$dir/../include/Packets.h"
+done
