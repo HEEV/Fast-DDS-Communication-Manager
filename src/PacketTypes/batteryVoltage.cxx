@@ -34,37 +34,32 @@ using namespace eprosima::fastcdr::exception;
 
 #include <utility>
 
-class Header;
-
 BatteryVoltage::BatteryVoltage()
 {
-    // m_head com.eprosima.fastdds.idl.parser.typecode.StructTypeCode@5c18298f
-    m_head = new Header();
-    // m_volt com.eprosima.idl.parser.typecode.PrimitiveTypeCode@31f924f5
+    // m_head com.eprosima.fastdds.idl.parser.typecode.StructTypeCode@17211155
+
+    // m_volt com.eprosima.idl.parser.typecode.PrimitiveTypeCode@10d59286
     m_volt = 0.0;
 
 }
 
 BatteryVoltage::~BatteryVoltage()
 {
-    delete m_head;
+
 
 }
 
 BatteryVoltage::BatteryVoltage(
         const BatteryVoltage& x)
 {
-    m_head = new Header();
-    *m_head = *x.m_head;
-
+    m_head = x.m_head;
     m_volt = x.m_volt;
 }
 
 BatteryVoltage::BatteryVoltage(
         BatteryVoltage&& x) noexcept 
 {
-    m_head = x.m_head;
-    x.m_head = nullptr;
+    m_head = std::move(x.m_head);
     m_volt = x.m_volt;
 }
 
@@ -72,9 +67,7 @@ BatteryVoltage& BatteryVoltage::operator =(
         const BatteryVoltage& x)
 {
 
-    m_head = new Header();
-    *m_head = *x.m_head;
-
+    m_head = x.m_head;
     m_volt = x.m_volt;
 
     return *this;
@@ -84,8 +77,7 @@ BatteryVoltage& BatteryVoltage::operator =(
         BatteryVoltage&& x) noexcept
 {
 
-    m_head = x.m_head;
-    x.m_head = nullptr;
+    m_head = std::move(x.m_head);
     m_volt = x.m_volt;
 
     return *this;
@@ -138,7 +130,7 @@ void BatteryVoltage::serialize(
         eprosima::fastcdr::Cdr& scdr) const
 {
 
-    scdr << *m_head;
+    scdr << m_head;
     scdr << m_volt;
 
 }
@@ -147,7 +139,7 @@ void BatteryVoltage::deserialize(
         eprosima::fastcdr::Cdr& dcdr)
 {
 
-    dcdr >> *m_head;
+    dcdr >> m_head;
     dcdr >> m_volt;
 }
 
@@ -158,7 +150,7 @@ void BatteryVoltage::deserialize(
 void BatteryVoltage::head(
         const Header& _head)
 {
-    *m_head = _head;
+    m_head = _head;
 }
 
 /*!
@@ -168,7 +160,7 @@ void BatteryVoltage::head(
 void BatteryVoltage::head(
         Header&& _head)
 {
-    *m_head = std::move(_head);
+    m_head = std::move(_head);
 }
 
 /*!
@@ -177,7 +169,7 @@ void BatteryVoltage::head(
  */
 const Header& BatteryVoltage::head() const
 {
-    return *m_head;
+    return m_head;
 }
 
 /*!
@@ -186,7 +178,7 @@ const Header& BatteryVoltage::head() const
  */
 Header& BatteryVoltage::head()
 {
-    return *m_head;
+    return m_head;
 }
 /*!
  * @brief This function sets a value in member volt

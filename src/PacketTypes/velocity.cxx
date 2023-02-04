@@ -34,37 +34,32 @@ using namespace eprosima::fastcdr::exception;
 
 #include <utility>
 
-class Header;
-
 Velocity::Velocity()
 {
-    // m_head com.eprosima.fastdds.idl.parser.typecode.StructTypeCode@6cc7b4de
-    m_head = new Header();
-    // m_magnitude com.eprosima.idl.parser.typecode.PrimitiveTypeCode@32cf48b7
+    // m_head com.eprosima.fastdds.idl.parser.typecode.StructTypeCode@1442d7b5
+
+    // m_magnitude com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1efee8e7
     m_magnitude = 0.0;
 
 }
 
 Velocity::~Velocity()
 {
-    delete m_head;
+
 
 }
 
 Velocity::Velocity(
         const Velocity& x)
 {
-    m_head = new Header();
-    *m_head = *x.m_head;
-
+    m_head = x.m_head;
     m_magnitude = x.m_magnitude;
 }
 
 Velocity::Velocity(
         Velocity&& x) noexcept 
 {
-    m_head = x.m_head;
-    x.m_head = nullptr;
+    m_head = std::move(x.m_head);
     m_magnitude = x.m_magnitude;
 }
 
@@ -72,9 +67,7 @@ Velocity& Velocity::operator =(
         const Velocity& x)
 {
 
-    m_head = new Header();
-    *m_head = *x.m_head;
-
+    m_head = x.m_head;
     m_magnitude = x.m_magnitude;
 
     return *this;
@@ -84,8 +77,7 @@ Velocity& Velocity::operator =(
         Velocity&& x) noexcept
 {
 
-    m_head = x.m_head;
-    x.m_head = nullptr;
+    m_head = std::move(x.m_head);
     m_magnitude = x.m_magnitude;
 
     return *this;
@@ -138,7 +130,7 @@ void Velocity::serialize(
         eprosima::fastcdr::Cdr& scdr) const
 {
 
-    scdr << *m_head;
+    scdr << m_head;
     scdr << m_magnitude;
 
 }
@@ -147,7 +139,7 @@ void Velocity::deserialize(
         eprosima::fastcdr::Cdr& dcdr)
 {
 
-    dcdr >> *m_head;
+    dcdr >> m_head;
     dcdr >> m_magnitude;
 }
 
@@ -158,7 +150,7 @@ void Velocity::deserialize(
 void Velocity::head(
         const Header& _head)
 {
-    *m_head = _head;
+    m_head = _head;
 }
 
 /*!
@@ -168,7 +160,7 @@ void Velocity::head(
 void Velocity::head(
         Header&& _head)
 {
-    *m_head = std::move(_head);
+    m_head = std::move(_head);
 }
 
 /*!
@@ -177,7 +169,7 @@ void Velocity::head(
  */
 const Header& Velocity::head() const
 {
-    return *m_head;
+    return m_head;
 }
 
 /*!
@@ -186,7 +178,7 @@ const Header& Velocity::head() const
  */
 Header& Velocity::head()
 {
-    return *m_head;
+    return m_head;
 }
 /*!
  * @brief This function sets a value in member magnitude

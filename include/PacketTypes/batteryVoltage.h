@@ -22,6 +22,7 @@
 #ifndef _FAST_DDS_GENERATED_BATTERYVOLTAGE_H_
 #define _FAST_DDS_GENERATED_BATTERYVOLTAGE_H_
 
+#include "header.h"
 
 #include <fastrtps/utils/fixed_size_string.hpp>
 
@@ -62,8 +63,6 @@ class Cdr;
 } // namespace fastcdr
 } // namespace eprosima
 
-
-class Header;
 
 /*!
  * @brief This class represents the structure BatteryVoltage defined by the user in the IDL file.
@@ -229,7 +228,7 @@ public:
 
 private:
 
-    Header* m_head;
+    Header m_head;
     float m_volt;
 };
 

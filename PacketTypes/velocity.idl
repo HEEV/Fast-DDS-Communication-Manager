@@ -1,4 +1,4 @@
-struct Header;
+#include "header.idl"
 
 struct Velocity
 {

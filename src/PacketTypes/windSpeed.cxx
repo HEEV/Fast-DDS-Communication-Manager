@@ -34,37 +34,32 @@ using namespace eprosima::fastcdr::exception;
 
 #include <utility>
 
-class Header;
-
 windSpeed::windSpeed()
 {
-    // m_head com.eprosima.fastdds.idl.parser.typecode.StructTypeCode@37574691
-    m_head = new Header();
-    // m_headSpeed com.eprosima.idl.parser.typecode.PrimitiveTypeCode@25359ed8
+    // m_head com.eprosima.fastdds.idl.parser.typecode.StructTypeCode@6a79c292
+
+    // m_headSpeed com.eprosima.idl.parser.typecode.PrimitiveTypeCode@21a947fe
     m_headSpeed = 0.0;
 
 }
 
 windSpeed::~windSpeed()
 {
-    delete m_head;
+
 
 }
 
 windSpeed::windSpeed(
         const windSpeed& x)
 {
-    m_head = new Header();
-    *m_head = *x.m_head;
-
+    m_head = x.m_head;
     m_headSpeed = x.m_headSpeed;
 }
 
 windSpeed::windSpeed(
         windSpeed&& x) noexcept 
 {
-    m_head = x.m_head;
-    x.m_head = nullptr;
+    m_head = std::move(x.m_head);
     m_headSpeed = x.m_headSpeed;
 }
 
@@ -72,9 +67,7 @@ windSpeed& windSpeed::operator =(
         const windSpeed& x)
 {
 
-    m_head = new Header();
-    *m_head = *x.m_head;
-
+    m_head = x.m_head;
     m_headSpeed = x.m_headSpeed;
 
     return *this;
@@ -84,8 +77,7 @@ windSpeed& windSpeed::operator =(
         windSpeed&& x) noexcept
 {
 
-    m_head = x.m_head;
-    x.m_head = nullptr;
+    m_head = std::move(x.m_head);
     m_headSpeed = x.m_headSpeed;
 
     return *this;
@@ -138,7 +130,7 @@ void windSpeed::serialize(
         eprosima::fastcdr::Cdr& scdr) const
 {
 
-    scdr << *m_head;
+    scdr << m_head;
     scdr << m_headSpeed;
 
 }
@@ -147,7 +139,7 @@ void windSpeed::deserialize(
         eprosima::fastcdr::Cdr& dcdr)
 {
 
-    dcdr >> *m_head;
+    dcdr >> m_head;
     dcdr >> m_headSpeed;
 }
 
@@ -158,7 +150,7 @@ void windSpeed::deserialize(
 void windSpeed::head(
         const Header& _head)
 {
-    *m_head = _head;
+    m_head = _head;
 }
 
 /*!
@@ -168,7 +160,7 @@ void windSpeed::head(
 void windSpeed::head(
         Header&& _head)
 {
-    *m_head = std::move(_head);
+    m_head = std::move(_head);
 }
 
 /*!
@@ -177,7 +169,7 @@ void windSpeed::head(
  */
 const Header& windSpeed::head() const
 {
-    return *m_head;
+    return m_head;
 }
 
 /*!
@@ -186,7 +178,7 @@ const Header& windSpeed::head() const
  */
 Header& windSpeed::head()
 {
-    return *m_head;
+    return m_head;
 }
 /*!
  * @brief This function sets a value in member headSpeed

@@ -33,8 +33,6 @@
     Generated batteryVoltage is not compatible with current installed Fast DDS. Please, regenerate it with fastddsgen.
 #endif  // GEN_API_VER
 
-class Header;
-
 /*!
  * @brief This class represents the TopicDataType of the type BatteryVoltage defined by the user in the IDL file.
  * @ingroup BATTERYVOLTAGE
