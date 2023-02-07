@@ -1,0 +1,7 @@
+#include "header.idl"
+
+struct CarTilt
+{
+    Header head;
+    float angle;
+};

@@ -36,13 +36,13 @@ using namespace eprosima::fastcdr::exception;
 
 GPSPosition::GPSPosition()
 {
-    // m_head com.eprosima.fastdds.idl.parser.typecode.StructTypeCode@6e2c9341
+    // m_head com.eprosima.fastdds.idl.parser.typecode.StructTypeCode@1176dcec
 
-    // m_lat com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1442d7b5
+    // m_lat com.eprosima.idl.parser.typecode.PrimitiveTypeCode@3444d69d
     m_lat = 0.0;
-    // m_lng com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1efee8e7
+    // m_lng com.eprosima.idl.parser.typecode.PrimitiveTypeCode@37574691
     m_lng = 0.0;
-    // m_alt com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1ee807c6
+    // m_alt com.eprosima.idl.parser.typecode.PrimitiveTypeCode@25359ed8
     m_alt = 0.0;
 
 }

@@ -36,9 +36,9 @@ using namespace eprosima::fastcdr::exception;
 
 WindSpeed::WindSpeed()
 {
-    // m_head com.eprosima.fastdds.idl.parser.typecode.StructTypeCode@6b53e23f
+    // m_head com.eprosima.fastdds.idl.parser.typecode.StructTypeCode@2d2e5f00
 
-    // m_headSpeed com.eprosima.idl.parser.typecode.PrimitiveTypeCode@4f9a3314
+    // m_headSpeed com.eprosima.idl.parser.typecode.PrimitiveTypeCode@4c40b76e
     m_headSpeed = 0.0;
 
 }

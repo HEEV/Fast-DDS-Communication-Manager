@@ -1,6 +1,8 @@
 #pragma once
 #include "PacketTypes/batteryVoltage.h"
 #include "PacketTypes/batteryVoltagePubSubTypes.h"
+#include "PacketTypes/carTilt.h"
+#include "PacketTypes/carTiltPubSubTypes.h"
 #include "PacketTypes/engineTemp.h"
 #include "PacketTypes/engineTempPubSubTypes.h"
 #include "PacketTypes/GPSPosition.h"

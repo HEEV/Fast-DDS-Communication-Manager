@@ -1,6 +1,8 @@
 target_sources(${PROJECT_NAME} PRIVATE
 batteryVoltage.cxx
 batteryVoltagePubSubTypes.cxx
+carTilt.cxx
+carTiltPubSubTypes.cxx
 engineTemp.cxx
 engineTempPubSubTypes.cxx
 GPSPosition.cxx
