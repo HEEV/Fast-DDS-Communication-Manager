@@ -1,0 +1,8 @@
+#include "header.idl"
+
+struct Velocity
+{
+    Header head;
+    float velocity;
+    float distTravelled;
+};

@@ -1,0 +1,9 @@
+#include "header.idl"
+
+struct GPSPosition
+{
+    Header head;
+    double lat;
+    double lng;
+    double alt;
+};

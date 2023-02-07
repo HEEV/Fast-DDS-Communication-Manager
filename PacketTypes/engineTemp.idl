@@ -1,7 +1,7 @@
 #include "header.idl"
 
-struct Velocity
+struct EngineTemp
 {
     Header head;
-    float magnitude;
+    float temp;
 };

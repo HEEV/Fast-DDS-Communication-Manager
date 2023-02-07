@@ -1,6 +1,6 @@
 #include "header.idl"
 
-struct windSpeed
+struct WindSpeed
 {
     Header head;
     float headSpeed;
