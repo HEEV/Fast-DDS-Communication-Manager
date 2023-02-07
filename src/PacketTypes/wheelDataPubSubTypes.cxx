@@ -28,20 +28,20 @@
 using SerializedPayload_t = eprosima::fastrtps::rtps::SerializedPayload_t;
 using InstanceHandle_t = eprosima::fastrtps::rtps::InstanceHandle_t;
 
-VelocityPubSubType::VelocityPubSubType()
+WheelDataPubSubType::WheelDataPubSubType()
 {
-    setName("Velocity");
-    auto type_size = Velocity::getMaxCdrSerializedSize();
+    setName("WheelData");
+    auto type_size = WheelData::getMaxCdrSerializedSize();
     type_size += eprosima::fastcdr::Cdr::alignment(type_size, 4); /* possible submessage alignment */
     m_typeSize = static_cast<uint32_t>(type_size) + 4; /*encapsulation*/
-    m_isGetKeyDefined = Velocity::isKeyDefined();
-    size_t keyLength = Velocity::getKeyMaxCdrSerializedSize() > 16 ?
-            Velocity::getKeyMaxCdrSerializedSize() : 16;
+    m_isGetKeyDefined = WheelData::isKeyDefined();
+    size_t keyLength = WheelData::getKeyMaxCdrSerializedSize() > 16 ?
+            WheelData::getKeyMaxCdrSerializedSize() : 16;
     m_keyBuffer = reinterpret_cast<unsigned char*>(malloc(keyLength));
     memset(m_keyBuffer, 0, keyLength);
 }
 
-VelocityPubSubType::~VelocityPubSubType()
+WheelDataPubSubType::~WheelDataPubSubType()
 {
     if (m_keyBuffer != nullptr)
     {
@@ -49,11 +49,11 @@ VelocityPubSubType::~VelocityPubSubType()
     }
 }
 
-bool VelocityPubSubType::serialize(
+bool WheelDataPubSubType::serialize(
         void* data,
         SerializedPayload_t* payload)
 {
-    Velocity* p_type = static_cast<Velocity*>(data);
+    WheelData* p_type = static_cast<WheelData*>(data);
 
     // Object that manages the raw buffer.
     eprosima::fastcdr::FastBuffer fastbuffer(reinterpret_cast<char*>(payload->data), payload->max_size);
@@ -78,14 +78,14 @@ bool VelocityPubSubType::serialize(
     return true;
 }
 
-bool VelocityPubSubType::deserialize(
+bool WheelDataPubSubType::deserialize(
         SerializedPayload_t* payload,
         void* data)
 {
     try
     {
         //Convert DATA to pointer of your type
-        Velocity* p_type = static_cast<Velocity*>(data);
+        WheelData* p_type = static_cast<WheelData*>(data);
 
         // Object that manages the raw buffer.
         eprosima::fastcdr::FastBuffer fastbuffer(reinterpret_cast<char*>(payload->data), payload->length);
@@ -108,28 +108,28 @@ bool VelocityPubSubType::deserialize(
     return true;
 }
 
-std::function<uint32_t()> VelocityPubSubType::getSerializedSizeProvider(
+std::function<uint32_t()> WheelDataPubSubType::getSerializedSizeProvider(
         void* data)
 {
     return [data]() -> uint32_t
            {
-               return static_cast<uint32_t>(type::getCdrSerializedSize(*static_cast<Velocity*>(data))) +
+               return static_cast<uint32_t>(type::getCdrSerializedSize(*static_cast<WheelData*>(data))) +
                       4u /*encapsulation*/;
            };
 }
 
-void* VelocityPubSubType::createData()
+void* WheelDataPubSubType::createData()
 {
-    return reinterpret_cast<void*>(new Velocity());
+    return reinterpret_cast<void*>(new WheelData());
 }
 
-void VelocityPubSubType::deleteData(
+void WheelDataPubSubType::deleteData(
         void* data)
 {
-    delete(reinterpret_cast<Velocity*>(data));
+    delete(reinterpret_cast<WheelData*>(data));
 }
 
-bool VelocityPubSubType::getKey(
+bool WheelDataPubSubType::getKey(
         void* data,
         InstanceHandle_t* handle,
         bool force_md5)
@@ -139,16 +139,16 @@ bool VelocityPubSubType::getKey(
         return false;
     }
 
-    Velocity* p_type = static_cast<Velocity*>(data);
+    WheelData* p_type = static_cast<WheelData*>(data);
 
     // Object that manages the raw buffer.
     eprosima::fastcdr::FastBuffer fastbuffer(reinterpret_cast<char*>(m_keyBuffer),
-            Velocity::getKeyMaxCdrSerializedSize());
+            WheelData::getKeyMaxCdrSerializedSize());
 
     // Object that serializes the data.
     eprosima::fastcdr::Cdr ser(fastbuffer, eprosima::fastcdr::Cdr::BIG_ENDIANNESS);
     p_type->serializeKey(ser);
-    if (force_md5 || Velocity::getKeyMaxCdrSerializedSize() > 16)
+    if (force_md5 || WheelData::getKeyMaxCdrSerializedSize() > 16)
     {
         m_md5.init();
         m_md5.update(m_keyBuffer, static_cast<unsigned int>(ser.getSerializedDataLength()));

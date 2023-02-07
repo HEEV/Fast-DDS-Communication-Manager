@@ -65,64 +65,64 @@ class Cdr;
 
 
 /*!
- * @brief This class represents the structure Velocity defined by the user in the IDL file.
+ * @brief This class represents the structure WheelData defined by the user in the IDL file.
  * @ingroup WHEELDATA
  */
-class Velocity
+class WheelData
 {
 public:
 
     /*!
      * @brief Default constructor.
      */
-    eProsima_user_DllExport Velocity();
+    eProsima_user_DllExport WheelData();
 
     /*!
      * @brief Default destructor.
      */
-    eProsima_user_DllExport ~Velocity();
+    eProsima_user_DllExport ~WheelData();
 
     /*!
      * @brief Copy constructor.
-     * @param x Reference to the object Velocity that will be copied.
+     * @param x Reference to the object WheelData that will be copied.
      */
-    eProsima_user_DllExport Velocity(
-            const Velocity& x);
+    eProsima_user_DllExport WheelData(
+            const WheelData& x);
 
     /*!
      * @brief Move constructor.
-     * @param x Reference to the object Velocity that will be copied.
+     * @param x Reference to the object WheelData that will be copied.
      */
-    eProsima_user_DllExport Velocity(
-            Velocity&& x) noexcept;
+    eProsima_user_DllExport WheelData(
+            WheelData&& x) noexcept;
 
     /*!
      * @brief Copy assignment.
-     * @param x Reference to the object Velocity that will be copied.
+     * @param x Reference to the object WheelData that will be copied.
      */
-    eProsima_user_DllExport Velocity& operator =(
-            const Velocity& x);
+    eProsima_user_DllExport WheelData& operator =(
+            const WheelData& x);
 
     /*!
      * @brief Move assignment.
-     * @param x Reference to the object Velocity that will be copied.
+     * @param x Reference to the object WheelData that will be copied.
      */
-    eProsima_user_DllExport Velocity& operator =(
-            Velocity&& x) noexcept;
+    eProsima_user_DllExport WheelData& operator =(
+            WheelData&& x) noexcept;
 
     /*!
      * @brief Comparison operator.
-     * @param x Velocity object to compare.
+     * @param x WheelData object to compare.
      */
     eProsima_user_DllExport bool operator ==(
-            const Velocity& x) const;
+            const WheelData& x) const;
 
     /*!
      * @brief Comparison operator.
-     * @param x Velocity object to compare.
+     * @param x WheelData object to compare.
      */
     eProsima_user_DllExport bool operator !=(
-            const Velocity& x) const;
+            const WheelData& x) const;
 
     /*!
      * @brief This function copies the value in member head
@@ -204,7 +204,7 @@ public:
      * @return Serialized size.
      */
     eProsima_user_DllExport static size_t getCdrSerializedSize(
-            const Velocity& data,
+            const WheelData& data,
             size_t current_alignment = 0);
 
 

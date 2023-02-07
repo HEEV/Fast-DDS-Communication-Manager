@@ -34,7 +34,7 @@ using namespace eprosima::fastcdr::exception;
 
 #include <utility>
 
-Velocity::Velocity()
+WheelData::WheelData()
 {
     // m_head com.eprosima.fastdds.idl.parser.typecode.StructTypeCode@551bdc27
 
@@ -45,31 +45,31 @@ Velocity::Velocity()
 
 }
 
-Velocity::~Velocity()
+WheelData::~WheelData()
 {
 
 
 
 }
 
-Velocity::Velocity(
-        const Velocity& x)
+WheelData::WheelData(
+        const WheelData& x)
 {
     m_head = x.m_head;
     m_velocity = x.m_velocity;
     m_distTravelled = x.m_distTravelled;
 }
 
-Velocity::Velocity(
-        Velocity&& x) noexcept 
+WheelData::WheelData(
+        WheelData&& x) noexcept 
 {
     m_head = std::move(x.m_head);
     m_velocity = x.m_velocity;
     m_distTravelled = x.m_distTravelled;
 }
 
-Velocity& Velocity::operator =(
-        const Velocity& x)
+WheelData& WheelData::operator =(
+        const WheelData& x)
 {
 
     m_head = x.m_head;
@@ -79,8 +79,8 @@ Velocity& Velocity::operator =(
     return *this;
 }
 
-Velocity& Velocity::operator =(
-        Velocity&& x) noexcept
+WheelData& WheelData::operator =(
+        WheelData&& x) noexcept
 {
 
     m_head = std::move(x.m_head);
@@ -90,20 +90,20 @@ Velocity& Velocity::operator =(
     return *this;
 }
 
-bool Velocity::operator ==(
-        const Velocity& x) const
+bool WheelData::operator ==(
+        const WheelData& x) const
 {
 
     return (m_head == x.m_head && m_velocity == x.m_velocity && m_distTravelled == x.m_distTravelled);
 }
 
-bool Velocity::operator !=(
-        const Velocity& x) const
+bool WheelData::operator !=(
+        const WheelData& x) const
 {
     return !(*this == x);
 }
 
-size_t Velocity::getMaxCdrSerializedSize(
+size_t WheelData::getMaxCdrSerializedSize(
         size_t current_alignment)
 {
     size_t initial_alignment = current_alignment;
@@ -120,8 +120,8 @@ size_t Velocity::getMaxCdrSerializedSize(
     return current_alignment - initial_alignment;
 }
 
-size_t Velocity::getCdrSerializedSize(
-        const Velocity& data,
+size_t WheelData::getCdrSerializedSize(
+        const WheelData& data,
         size_t current_alignment)
 {
     (void)data;
@@ -139,7 +139,7 @@ size_t Velocity::getCdrSerializedSize(
     return current_alignment - initial_alignment;
 }
 
-void Velocity::serialize(
+void WheelData::serialize(
         eprosima::fastcdr::Cdr& scdr) const
 {
 
@@ -149,7 +149,7 @@ void Velocity::serialize(
 
 }
 
-void Velocity::deserialize(
+void WheelData::deserialize(
         eprosima::fastcdr::Cdr& dcdr)
 {
 
@@ -162,7 +162,7 @@ void Velocity::deserialize(
  * @brief This function copies the value in member head
  * @param _head New value to be copied in member head
  */
-void Velocity::head(
+void WheelData::head(
         const Header& _head)
 {
     m_head = _head;
@@ -172,7 +172,7 @@ void Velocity::head(
  * @brief This function moves the value in member head
  * @param _head New value to be moved in member head
  */
-void Velocity::head(
+void WheelData::head(
         Header&& _head)
 {
     m_head = std::move(_head);
@@ -182,7 +182,7 @@ void Velocity::head(
  * @brief This function returns a constant reference to member head
  * @return Constant reference to member head
  */
-const Header& Velocity::head() const
+const Header& WheelData::head() const
 {
     return m_head;
 }
@@ -191,7 +191,7 @@ const Header& Velocity::head() const
  * @brief This function returns a reference to member head
  * @return Reference to member head
  */
-Header& Velocity::head()
+Header& WheelData::head()
 {
     return m_head;
 }
@@ -199,7 +199,7 @@ Header& Velocity::head()
  * @brief This function sets a value in member velocity
  * @param _velocity New value for member velocity
  */
-void Velocity::velocity(
+void WheelData::velocity(
         float _velocity)
 {
     m_velocity = _velocity;
@@ -209,7 +209,7 @@ void Velocity::velocity(
  * @brief This function returns the value of member velocity
  * @return Value of member velocity
  */
-float Velocity::velocity() const
+float WheelData::velocity() const
 {
     return m_velocity;
 }
@@ -218,7 +218,7 @@ float Velocity::velocity() const
  * @brief This function returns a reference to member velocity
  * @return Reference to member velocity
  */
-float& Velocity::velocity()
+float& WheelData::velocity()
 {
     return m_velocity;
 }
@@ -227,7 +227,7 @@ float& Velocity::velocity()
  * @brief This function sets a value in member distTravelled
  * @param _distTravelled New value for member distTravelled
  */
-void Velocity::distTravelled(
+void WheelData::distTravelled(
         float _distTravelled)
 {
     m_distTravelled = _distTravelled;
@@ -237,7 +237,7 @@ void Velocity::distTravelled(
  * @brief This function returns the value of member distTravelled
  * @return Value of member distTravelled
  */
-float Velocity::distTravelled() const
+float WheelData::distTravelled() const
 {
     return m_distTravelled;
 }
@@ -246,13 +246,13 @@ float Velocity::distTravelled() const
  * @brief This function returns a reference to member distTravelled
  * @return Reference to member distTravelled
  */
-float& Velocity::distTravelled()
+float& WheelData::distTravelled()
 {
     return m_distTravelled;
 }
 
 
-size_t Velocity::getKeyMaxCdrSerializedSize(
+size_t WheelData::getKeyMaxCdrSerializedSize(
         size_t current_alignment)
 {
     size_t current_align = current_alignment;
@@ -265,12 +265,12 @@ size_t Velocity::getKeyMaxCdrSerializedSize(
     return current_align;
 }
 
-bool Velocity::isKeyDefined()
+bool WheelData::isKeyDefined()
 {
     return false;
 }
 
-void Velocity::serializeKey(
+void WheelData::serializeKey(
         eprosima::fastcdr::Cdr& scdr) const
 {
     (void) scdr;

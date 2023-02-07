@@ -34,18 +34,18 @@
 #endif  // GEN_API_VER
 
 /*!
- * @brief This class represents the TopicDataType of the type Velocity defined by the user in the IDL file.
+ * @brief This class represents the TopicDataType of the type WheelData defined by the user in the IDL file.
  * @ingroup WHEELDATA
  */
-class VelocityPubSubType : public eprosima::fastdds::dds::TopicDataType
+class WheelDataPubSubType : public eprosima::fastdds::dds::TopicDataType
 {
 public:
 
-    typedef Velocity type;
+    typedef WheelData type;
 
-    eProsima_user_DllExport VelocityPubSubType();
+    eProsima_user_DllExport WheelDataPubSubType();
 
-    eProsima_user_DllExport virtual ~VelocityPubSubType() override;
+    eProsima_user_DllExport virtual ~WheelDataPubSubType() override;
 
     eProsima_user_DllExport virtual bool serialize(
             void* data,
@@ -88,7 +88,7 @@ public:
     eProsima_user_DllExport inline bool construct_sample(
             void* memory) const override
     {
-        new (memory) Velocity();
+        new (memory) WheelData();
         return true;
     }
 

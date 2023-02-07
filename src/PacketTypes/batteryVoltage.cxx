@@ -36,9 +36,9 @@ using namespace eprosima::fastcdr::exception;
 
 BatteryVoltage::BatteryVoltage()
 {
-    // m_head com.eprosima.fastdds.idl.parser.typecode.StructTypeCode@5fdba6f9
+    // m_head com.eprosima.fastdds.idl.parser.typecode.StructTypeCode@17211155
 
-    // m_volt com.eprosima.idl.parser.typecode.PrimitiveTypeCode@6fb0d3ed
+    // m_volt com.eprosima.idl.parser.typecode.PrimitiveTypeCode@10d59286
     m_volt = 0.0;
 
 }

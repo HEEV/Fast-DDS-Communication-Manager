@@ -1,6 +1,6 @@
 #include "header.idl"
 
-struct Velocity
+struct WheelData
 {
     Header head;
     float velocity;
