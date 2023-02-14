@@ -139,6 +139,9 @@ eprosima::fastdds::dds::DomainParticipant *CommunicationManager::_createServerPa
     server_qos.wire_protocol().builtin.metatrafficUnicastLocatorList.push_back(locator);
     server_qos.wire_protocol().builtin.typelookup_config.use_client = true;
     server_qos.wire_protocol().builtin.typelookup_config.use_server = true;
+
+    server_qos.transport().send_socket_buffer_size = 1048576;
+    server_qos.transport().listen_socket_buffer_size = 4194304;
     
     return DomainParticipantFactory::get_instance()->create_participant(0, server_qos);
 }
@@ -172,6 +175,9 @@ eprosima::fastdds::dds::DomainParticipant *CommunicationManager::_createClientPa
 
     client_qos.wire_protocol().builtin.typelookup_config.use_client = true;
     client_qos.wire_protocol().builtin.typelookup_config.use_server = true;
+
+    client_qos.transport().send_socket_buffer_size = 1048576;
+    client_qos.transport().listen_socket_buffer_size = 1048576;
 
     // Create CLIENT
     return DomainParticipantFactory::get_instance()->create_participant(0, client_qos);
