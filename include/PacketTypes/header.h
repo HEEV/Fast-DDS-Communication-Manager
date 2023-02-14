@@ -143,6 +143,25 @@ public:
     eProsima_user_DllExport uint32_t& id();
 
     /*!
+     * @brief This function sets a value in member timeOcc
+     * @param _timeOcc New value for member timeOcc
+     */
+    eProsima_user_DllExport void timeOcc(
+            int64_t _timeOcc);
+
+    /*!
+     * @brief This function returns the value of member timeOcc
+     * @return Value of member timeOcc
+     */
+    eProsima_user_DllExport int64_t timeOcc() const;
+
+    /*!
+     * @brief This function returns a reference to member timeOcc
+     * @return Reference to member timeOcc
+     */
+    eProsima_user_DllExport int64_t& timeOcc();
+
+    /*!
      * @brief This function sets a value in member timeRec
      * @param _timeRec New value for member timeRec
      */
@@ -241,6 +260,7 @@ public:
 private:
 
     uint32_t m_id;
+    int64_t m_timeOcc;
     int64_t m_timeRec;
     int64_t m_timeSent;
 };

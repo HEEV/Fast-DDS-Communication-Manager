@@ -38,9 +38,11 @@ Header::Header()
 {
     // m_id com.eprosima.idl.parser.typecode.PrimitiveTypeCode@23a5fd2
     m_id = 0;
-    // m_timeRec com.eprosima.idl.parser.typecode.PrimitiveTypeCode@78a2da20
+    // m_timeOcc com.eprosima.idl.parser.typecode.PrimitiveTypeCode@78a2da20
+    m_timeOcc = 0;
+    // m_timeRec com.eprosima.idl.parser.typecode.PrimitiveTypeCode@dd3b207
     m_timeRec = 0;
-    // m_timeSent com.eprosima.idl.parser.typecode.PrimitiveTypeCode@dd3b207
+    // m_timeSent com.eprosima.idl.parser.typecode.PrimitiveTypeCode@551bdc27
     m_timeSent = 0;
 
 }
@@ -50,12 +52,14 @@ Header::~Header()
 
 
 
+
 }
 
 Header::Header(
         const Header& x)
 {
     m_id = x.m_id;
+    m_timeOcc = x.m_timeOcc;
     m_timeRec = x.m_timeRec;
     m_timeSent = x.m_timeSent;
 }
@@ -64,6 +68,7 @@ Header::Header(
         Header&& x) noexcept 
 {
     m_id = x.m_id;
+    m_timeOcc = x.m_timeOcc;
     m_timeRec = x.m_timeRec;
     m_timeSent = x.m_timeSent;
 }
@@ -73,6 +78,7 @@ Header& Header::operator =(
 {
 
     m_id = x.m_id;
+    m_timeOcc = x.m_timeOcc;
     m_timeRec = x.m_timeRec;
     m_timeSent = x.m_timeSent;
 
@@ -84,6 +90,7 @@ Header& Header::operator =(
 {
 
     m_id = x.m_id;
+    m_timeOcc = x.m_timeOcc;
     m_timeRec = x.m_timeRec;
     m_timeSent = x.m_timeSent;
 
@@ -94,7 +101,7 @@ bool Header::operator ==(
         const Header& x) const
 {
 
-    return (m_id == x.m_id && m_timeRec == x.m_timeRec && m_timeSent == x.m_timeSent);
+    return (m_id == x.m_id && m_timeOcc == x.m_timeOcc && m_timeRec == x.m_timeRec && m_timeSent == x.m_timeSent);
 }
 
 bool Header::operator !=(
@@ -110,6 +117,9 @@ size_t Header::getMaxCdrSerializedSize(
 
 
     current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+
+
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
     current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
@@ -139,6 +149,9 @@ size_t Header::getCdrSerializedSize(
     current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
+
+
 
     return current_alignment - initial_alignment;
 }
@@ -148,6 +161,7 @@ void Header::serialize(
 {
 
     scdr << m_id;
+    scdr << m_timeOcc;
     scdr << m_timeRec;
     scdr << m_timeSent;
 
@@ -158,6 +172,7 @@ void Header::deserialize(
 {
 
     dcdr >> m_id;
+    dcdr >> m_timeOcc;
     dcdr >> m_timeRec;
     dcdr >> m_timeSent;
 }
@@ -188,6 +203,34 @@ uint32_t Header::id() const
 uint32_t& Header::id()
 {
     return m_id;
+}
+
+/*!
+ * @brief This function sets a value in member timeOcc
+ * @param _timeOcc New value for member timeOcc
+ */
+void Header::timeOcc(
+        int64_t _timeOcc)
+{
+    m_timeOcc = _timeOcc;
+}
+
+/*!
+ * @brief This function returns the value of member timeOcc
+ * @return Value of member timeOcc
+ */
+int64_t Header::timeOcc() const
+{
+    return m_timeOcc;
+}
+
+/*!
+ * @brief This function returns a reference to member timeOcc
+ * @return Reference to member timeOcc
+ */
+int64_t& Header::timeOcc()
+{
+    return m_timeOcc;
 }
 
 /*!
@@ -257,6 +300,7 @@ size_t Header::getKeyMaxCdrSerializedSize(
 
 
 
+
     return current_align;
 }
 
@@ -269,5 +313,5 @@ void Header::serializeKey(
         eprosima::fastcdr::Cdr& scdr) const
 {
     (void) scdr;
-       
+        
 }
