@@ -145,8 +145,8 @@ eprosima::fastdds::dds::DomainParticipant *CommunicationManager::_createServerPa
 
     server_qos.transport().use_builtin_transports = false;
     auto tcpTransport = std::make_shared<TCPv4TransportDescriptor>();
-    tcpTransport->sendBufferSize = 9216;
-    tcpTransport->receiveBufferSize = 9216;
+    tcpTransport->sendBufferSize = tcpTransport->max_message_size() * 16;
+    tcpTransport->receiveBufferSize = tcpTransport->max_message_size() * 16;
     tcpTransport->add_listener_port(data.port);
     tcpTransport->set_WAN_address(data.ip);
     server_qos.transport().user_transports.push_back(tcpTransport);
@@ -187,8 +187,8 @@ eprosima::fastdds::dds::DomainParticipant *CommunicationManager::_createClientPa
 
     client_qos.transport().use_builtin_transports = false;
     auto tcpTransport = std::make_shared<TCPv4TransportDescriptor>();
-    tcpTransport->sendBufferSize = 9216;
-    tcpTransport->receiveBufferSize = 9216;
+    tcpTransport->sendBufferSize = tcpTransport->max_message_size() * 16;
+    tcpTransport->receiveBufferSize = tcpTransport->max_message_size() * 16;
     client_qos.transport().user_transports.push_back(tcpTransport);
 
     // Create CLIENT
