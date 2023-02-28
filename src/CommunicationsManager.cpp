@@ -4,6 +4,7 @@
 #include <iostream>
 #include <algorithm>
 #include <fmt/format.h>
+#include "FastDDS.h"
 #include "PacketTypes/header.h"
 
 using namespace eprosima::fastdds::dds;
@@ -11,6 +12,7 @@ using namespace eprosima::fastdds;
 using namespace eprosima::fastrtps::rtps;
 using namespace eprosima::fastrtps::types;
 using namespace eprosima::fastrtps;
+using namespace eprosima::fastdds::rtps;
 
 CommunicationManager::CommunicationManager(std::string_view hostname, bool isServer)
 {
@@ -134,6 +136,7 @@ eprosima::fastdds::dds::DomainParticipant *CommunicationManager::_createServerPa
     // Set SERVER's listening locator for PDP
     IPData data = _parseIP(hostname);
     Locator_t locator;
+    locator.kind = LOCATOR_KIND_TCPv4;
     IPLocator::setIPv4(locator, data.ip);
     locator.port = data.port;
     server_qos.wire_protocol().builtin.metatrafficUnicastLocatorList.push_back(locator);
@@ -142,6 +145,14 @@ eprosima::fastdds::dds::DomainParticipant *CommunicationManager::_createServerPa
 
     server_qos.transport().send_socket_buffer_size = 1048576;
     server_qos.transport().listen_socket_buffer_size = 4194304;
+
+    server_qos.transport().use_builtin_transports = false;
+    auto tcpTransport = std::make_shared<TCPv4TransportDescriptor>();
+    tcpTransport->sendBufferSize = 9216;
+    tcpTransport->receiveBufferSize = 9216;
+    tcpTransport->add_listener_port(data.port);
+    tcpTransport->set_WAN_address(data.ip);
+    server_qos.transport().user_transports.push_back(tcpTransport);
     
     return DomainParticipantFactory::get_instance()->create_participant(0, server_qos);
 }
@@ -162,6 +173,7 @@ eprosima::fastdds::dds::DomainParticipant *CommunicationManager::_createClientPa
     // Set SERVER's listening locator for PDP
     IPData data = _parseIP(hostname);
     Locator_t locator;
+    locator.kind = LOCATOR_KIND_TCPv4;
     IPLocator::setIPv4(locator, data.ip);
     locator.port = data.port;
     remote_server_att.metatrafficUnicastLocatorList.push_back(locator);
@@ -178,6 +190,12 @@ eprosima::fastdds::dds::DomainParticipant *CommunicationManager::_createClientPa
 
     client_qos.transport().send_socket_buffer_size = 1048576;
     client_qos.transport().listen_socket_buffer_size = 1048576;
+
+    client_qos.transport().use_builtin_transports = false;
+    auto tcpTransport = std::make_shared<TCPv4TransportDescriptor>();
+    tcpTransport->sendBufferSize = 9216;
+    tcpTransport->receiveBufferSize = 9216;
+    client_qos.transport().user_transports.push_back(tcpTransport);
 
     // Create CLIENT
     return DomainParticipantFactory::get_instance()->create_participant(0, client_qos);
