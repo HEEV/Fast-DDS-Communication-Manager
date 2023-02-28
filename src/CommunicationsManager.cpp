@@ -143,9 +143,6 @@ eprosima::fastdds::dds::DomainParticipant *CommunicationManager::_createServerPa
     server_qos.wire_protocol().builtin.typelookup_config.use_client = true;
     server_qos.wire_protocol().builtin.typelookup_config.use_server = true;
 
-    server_qos.transport().send_socket_buffer_size = 1048576;
-    server_qos.transport().listen_socket_buffer_size = 4194304;
-
     server_qos.transport().use_builtin_transports = false;
     auto tcpTransport = std::make_shared<TCPv4TransportDescriptor>();
     tcpTransport->sendBufferSize = 9216;
@@ -187,9 +184,6 @@ eprosima::fastdds::dds::DomainParticipant *CommunicationManager::_createClientPa
 
     client_qos.wire_protocol().builtin.typelookup_config.use_client = true;
     client_qos.wire_protocol().builtin.typelookup_config.use_server = true;
-
-    client_qos.transport().send_socket_buffer_size = 1048576;
-    client_qos.transport().listen_socket_buffer_size = 1048576;
 
     client_qos.transport().use_builtin_transports = false;
     auto tcpTransport = std::make_shared<TCPv4TransportDescriptor>();
