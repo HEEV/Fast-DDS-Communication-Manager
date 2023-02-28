@@ -138,7 +138,6 @@ eprosima::fastdds::dds::DomainParticipant *CommunicationManager::_createServerPa
     Locator_t locator;
     locator.kind = LOCATOR_KIND_TCPv4;
     IPLocator::setIPv4(locator, data.ip);
-    locator.port = data.port;
     server_qos.wire_protocol().builtin.metatrafficUnicastLocatorList.push_back(locator);
     server_qos.wire_protocol().builtin.typelookup_config.use_client = true;
     server_qos.wire_protocol().builtin.typelookup_config.use_server = true;
@@ -147,7 +146,7 @@ eprosima::fastdds::dds::DomainParticipant *CommunicationManager::_createServerPa
     auto tcpTransport = std::make_shared<TCPv4TransportDescriptor>();
     tcpTransport->sendBufferSize = tcpTransport->max_message_size() * 16;
     tcpTransport->receiveBufferSize = tcpTransport->max_message_size() * 16;
-    tcpTransport->add_listener_port(data.port + 1);
+    tcpTransport->add_listener_port(data.port);
     tcpTransport->set_WAN_address(data.ip);
     server_qos.transport().user_transports.push_back(tcpTransport);
     
