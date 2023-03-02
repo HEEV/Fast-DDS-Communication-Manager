@@ -4,6 +4,8 @@
 #include <iostream>
 #include <algorithm>
 #include <fmt/format.h>
+#include <time.h>
+#include <random>
 #include "FastDDS.h"
 #include "PacketTypes/header.h"
 
@@ -157,13 +159,16 @@ eprosima::fastdds::dds::DomainParticipant *CommunicationManager::_createServerPa
 
 eprosima::fastdds::dds::DomainParticipant *CommunicationManager::_createClientParticipant(std::string_view hostname)
 {
-        // Get default participant QoS
+    // Get default participant QoS
     DomainParticipantQos client_qos = PARTICIPANT_QOS_DEFAULT;
 
     // Set participant as CLIENT
     client_qos.wire_protocol().builtin.discovery_config.discoveryProtocol =
             DiscoveryProtocol_t::CLIENT;
     client_qos.name("Server");
+
+    client_qos.wire_protocol().builtin.discovery_config.leaseDuration = c_TimeInfinite;
+    client_qos.name(fmt::format("Client-{}", time(NULL)));
 
     // Set SERVER's GUID prefix
     RemoteServerAttributes remote_server_att;
@@ -173,24 +178,24 @@ eprosima::fastdds::dds::DomainParticipant *CommunicationManager::_createClientPa
     IPData data = _parseIP(hostname);
     Locator_t locator;
     locator.kind = LOCATOR_KIND_TCPv4;
+    IPLocator::setLogicalPort(locator, data.port);
+    IPLocator::setPhysicalPort(locator, data.port);
     IPLocator::setIPv4(locator, data.ip);
-    locator.port = data.port;
     remote_server_att.metatrafficUnicastLocatorList.push_back(locator);
 
     // Add remote SERVER to CLIENT's list of SERVERs
     client_qos.wire_protocol().builtin.discovery_config.m_DiscoveryServers.push_back(remote_server_att);
 
-    // Set ping period to 250 ms
-    client_qos.wire_protocol().builtin.discovery_config.discoveryServer_client_syncperiod =
-            eprosima::fastrtps::Duration_t(0, 250000000);
-
-    client_qos.wire_protocol().builtin.typelookup_config.use_client = true;
-    client_qos.wire_protocol().builtin.typelookup_config.use_server = true;
-
     client_qos.transport().use_builtin_transports = false;
     auto tcpTransport = std::make_shared<TCPv4TransportDescriptor>();
     tcpTransport->sendBufferSize = tcpTransport->max_message_size() * 16;
     tcpTransport->receiveBufferSize = tcpTransport->max_message_size() * 16;
+
+    std::default_random_engine gen(time(NULL));
+    std::uniform_int_distribution rdn(49152, 65535);
+    tcpTransport->add_listener_port(rdn(gen));
+    tcpTransport->wait_for_tcp_negotiation = false;
+
     client_qos.transport().user_transports.push_back(tcpTransport);
 
     // Create CLIENT
