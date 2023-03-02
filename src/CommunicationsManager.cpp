@@ -132,18 +132,20 @@ eprosima::fastdds::dds::DomainParticipant *CommunicationManager::_createServerPa
 
     // Set SERVER's GUID prefix
     std::istringstream("44.53.00.5f.45.50.52.4f.53.49.4d.41") >> server_qos.wire_protocol().prefix;
+    server_qos.wire_protocol().builtin.discovery_config.leaseDuration = c_TimeInfinite;
 
     // Set SERVER's listening locator for PDP
     IPData data = _parseIP(hostname);
     Locator_t locator;
     locator.kind = LOCATOR_KIND_TCPv4;
+    IPLocator::setLogicalPort(locator, data.port);
     IPLocator::setIPv4(locator, data.ip);
+    IPLocator::setWan(locator, data.ip);
     server_qos.wire_protocol().builtin.metatrafficUnicastLocatorList.push_back(locator);
-    server_qos.wire_protocol().builtin.typelookup_config.use_client = true;
-    server_qos.wire_protocol().builtin.typelookup_config.use_server = true;
 
     server_qos.transport().use_builtin_transports = false;
     auto tcpTransport = std::make_shared<TCPv4TransportDescriptor>();
+    tcpTransport->wait_for_tcp_negotiation = false;
     tcpTransport->sendBufferSize = tcpTransport->max_message_size() * 16;
     tcpTransport->receiveBufferSize = tcpTransport->max_message_size() * 16;
     tcpTransport->add_listener_port(data.port);
@@ -161,6 +163,7 @@ eprosima::fastdds::dds::DomainParticipant *CommunicationManager::_createClientPa
     // Set participant as CLIENT
     client_qos.wire_protocol().builtin.discovery_config.discoveryProtocol =
             DiscoveryProtocol_t::CLIENT;
+    client_qos.name("Server");
 
     // Set SERVER's GUID prefix
     RemoteServerAttributes remote_server_att;
