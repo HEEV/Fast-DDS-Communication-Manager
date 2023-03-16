@@ -25,8 +25,10 @@ CommunicationManager::CommunicationManager(std::string_view hostname, bool isSer
     _subscriber = _participant->create_subscriber(SUBSCRIBER_QOS_DEFAULT);
     _readerFree = true;
     _callbackFree = true;
+    _writerFree = true;
     _run = true;
     _readerThread = std::thread(&CommunicationManager::_dataRecievedHandler, this);
+    _writerThread = std::thread(&CommunicationManager::_writeWorker, this);
 
 }
 
@@ -64,15 +66,28 @@ int CommunicationManager::addDataWriter(std::string topicName)
     return _writers.size() - 1;
 }
 
-void CommunicationManager::writeData(int dataWriterID, void* data)
+void CommunicationManager::_writeWorker()
 {
-    auto now = std::chrono::system_clock::now();
-    auto nowMS = std::chrono::time_point_cast<std::chrono::milliseconds>(now);
-    auto epoch = nowMS.time_since_epoch();
+    while(_run)
+    {
+        std::unique_lock lck(_writerMux);
+        _writerCV.wait(lck, [this](){ return _writerFree && !_data.empty(); });
+        _writerFree = false;
 
-    ((Header*)data)->timeSent(std::chrono::duration_cast<std::chrono::milliseconds>(epoch).count());
+        auto data = _data.front();
+        _data.pop();
+        auto now = std::chrono::system_clock::now();
+        auto nowMS = std::chrono::time_point_cast<std::chrono::milliseconds>(now);
+        auto epoch = nowMS.time_since_epoch();
 
-    _writers[dataWriterID]->write(data, eprosima::fastrtps::rtps::InstanceHandle_t());
+        ((Header*)data.data)->timeSent(std::chrono::duration_cast<std::chrono::milliseconds>(epoch).count());
+
+        _writers[data.writeID]->write(data.data, eprosima::fastrtps::rtps::InstanceHandle_t());
+        free(data.data);
+
+        _writerFree = true;
+        _writerCV.notify_all();
+    }
 }
 
 void CommunicationManager::shutdown()

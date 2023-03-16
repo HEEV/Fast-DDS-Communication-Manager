@@ -12,6 +12,7 @@
 #include <chrono>
 #include "PacketTypes/header.h"
 #include "FastDDS.h"
+#include <queue>
 
 /// @brief Registers the topic topicName on the communication manager manager with type type
 /// @param type Type the topic should use
@@ -41,10 +42,9 @@ public:
     /// @return The ID of the created data writer
     int addDataWriter(std::string topicName);
 
-    /// @brief Write data using the given dataWriter
-    /// @param dataWriterID The ID of the dataWriter to use
-    /// @param data The data to write. The data must begin with the Header type
-    void writeData(int dataWriterID, void* data);
+    template <typename T>
+    requires std::copyable<T>
+    void writeData(int writerID, T* data);
 
     /// @brief Adds a data reader that calls callback when data is recieved on the specified topic
     /// @tparam T The data type to be recieved
@@ -64,6 +64,12 @@ private:
         uint32_t port;
     };
 
+    struct DataContainer
+    {
+        int writeID;
+        void* data;
+    };
+
     eprosima::fastdds::dds::DomainParticipant* _participant;
     eprosima::fastdds::dds::Publisher* _publisher;
     eprosima::fastdds::dds::Subscriber* _subscriber;
@@ -72,6 +78,7 @@ private:
     std::vector<eprosima::fastdds::dds::DataReader*> _readers;
     std::vector<std::unique_ptr<eprosima::fastdds::dds::WaitSet>> _waitSets;
     std::map<std::string, std::vector<std::function<void(void*)>>> _callbacks;
+    std::queue<DataContainer> _data;
 
     std::thread _readerThread;
     std::mutex _readerMux;
@@ -82,10 +89,16 @@ private:
     bool _callbackFree;
     bool _run;
 
+    std::thread _writerThread;
+    std::mutex _writerMux;
+    std::condition_variable _writerCV;
+    bool _writerFree;
+
     void _dataRecievedHandler();
     eprosima::fastdds::dds::DomainParticipant* _createServerParticipant(std::string_view hostname);
     eprosima::fastdds::dds::DomainParticipant* _createClientParticipant(std::string_view hostname);
     IPData _parseIP(std::string_view hostname);
+    void _writeWorker();
 
 };
 
@@ -116,7 +129,23 @@ void CommunicationManager::registerTopic(std::string topicName)
 }
 
 template <typename T>
-void CommunicationManager::addDataReader(std::string topicName, std::function<void(T*)> callback)
+requires std::copyable<T>
+inline void CommunicationManager::writeData(int writerID, T *data)
+{
+    DataContainer d = {writerID, nullptr};
+    d.data = std::malloc(sizeof(&data));
+    std::memcpy(d.data, data, sizeof(&data));
+
+    std::unique_lock lck(_writerMux);
+    _writerCV.wait(lck, [this](){ return _writerFree; });
+    _writerFree = false;
+    _data.push(d);
+    _writerFree = true;
+    _writerCV.notify_all();
+}
+
+template <typename T>
+void CommunicationManager::addDataReader(std::string topicName, std::function<void(T *)> callback)
 {
     std::unique_lock lck(_readerMux);
     _readerCV.wait(lck, [this](){ return _readerFree; });
