@@ -37,6 +37,7 @@ CommunicationManager::~CommunicationManager()
 {
     shutdown();
     _readerThread.join();
+    _writerThread.join();
 
     for(const auto [name, topic] : _topics)
         _participant->delete_topic(topic);
