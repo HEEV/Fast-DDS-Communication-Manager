@@ -1,7 +1,6 @@
 #pragma once
 #include <map>
 #include <string>
-#include <string_view>
 #include <concepts>
 #include <functional>
 #include <thread>
@@ -10,9 +9,9 @@
 #include <condition_variable>
 #include <exception>
 #include <chrono>
+#include <queue>
 #include "PacketTypes/header.h"
 #include "FastDDS.h"
-#include <queue>
 
 /// @brief Registers the topic topicName on the communication manager manager with type type
 /// @param type Type the topic should use

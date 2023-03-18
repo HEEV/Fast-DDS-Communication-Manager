@@ -1,9 +1,8 @@
 #include "CommunicationManager.h"
 #include <istream>
 #include <chrono>
-#include <iostream>
 #include <algorithm>
-#include <fmt/format.h>
+#include <fmt/format-inl.h>
 #include <time.h>
 #include <random>
 #include "FastDDS.h"
@@ -183,7 +182,7 @@ eprosima::fastdds::dds::DomainParticipant *CommunicationManager::_createClientPa
     client_qos.name("Server");
 
     client_qos.wire_protocol().builtin.discovery_config.leaseDuration = c_TimeInfinite;
-    client_qos.name(fmt::format("Client-{}", time(NULL)));
+    //client_qos.name(fmt::format("Client-{}", time(NULL)));
 
     // Set SERVER's GUID prefix
     RemoteServerAttributes remote_server_att;
