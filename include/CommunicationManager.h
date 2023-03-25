@@ -132,8 +132,8 @@ requires std::copyable<T>
 inline void CommunicationManager::writeData(int writerID, T *data)
 {
     DataContainer d = {writerID, nullptr};
-    d.data = std::malloc(sizeof(&data));
-    std::memcpy(d.data, data, sizeof(&data));
+    d.data = std::malloc(sizeof(*data));
+    std::memcpy(d.data, data, sizeof(*data));
 
     std::unique_lock lck(_writerMux);
     _writerCV.wait(lck, [this](){ return _writerFree; });
