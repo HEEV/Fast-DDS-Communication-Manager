@@ -73,19 +73,21 @@ void CommunicationManager::_writeWorker()
     while(_run)
     {
         std::unique_lock lck(_writerMux);
-        _writerCV.wait(lck, [this](){ return _writerFree && !_data.empty(); });
+        _writerCV.wait(lck, [this](){ return _writerFree; });
         _writerFree = false;
+        if(!_data.empty())
+        {
+            auto data = _data.front();
+            _data.pop();
+            auto now = std::chrono::system_clock::now();
+            auto nowMS = std::chrono::time_point_cast<std::chrono::milliseconds>(now);
+            auto epoch = nowMS.time_since_epoch();
 
-        auto data = _data.front();
-        _data.pop();
-        auto now = std::chrono::system_clock::now();
-        auto nowMS = std::chrono::time_point_cast<std::chrono::milliseconds>(now);
-        auto epoch = nowMS.time_since_epoch();
+            ((Header*)data.data)->timeSent(std::chrono::duration_cast<std::chrono::milliseconds>(epoch).count());
 
-        ((Header*)data.data)->timeSent(std::chrono::duration_cast<std::chrono::milliseconds>(epoch).count());
-
-        _writers[data.writeID]->write(data.data, eprosima::fastrtps::rtps::InstanceHandle_t());
-        free(data.data);
+            _writers[data.writeID]->write(data.data, eprosima::fastrtps::rtps::InstanceHandle_t());
+            free(data.data);
+        }
 
         _writerFree = true;
         _writerCV.notify_all();
