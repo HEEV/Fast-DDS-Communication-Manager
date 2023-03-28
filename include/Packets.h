@@ -9,6 +9,8 @@
 #include "PacketTypes/GPSPositionPubSubTypes.h"
 #include "PacketTypes/header.h"
 #include "PacketTypes/headerPubSubTypes.h"
+#include "PacketTypes/raceInstructions.h"
+#include "PacketTypes/raceInstructionsPubSubTypes.h"
 #include "PacketTypes/wheelData.h"
 #include "PacketTypes/wheelDataPubSubTypes.h"
 #include "PacketTypes/windSpeed.h"

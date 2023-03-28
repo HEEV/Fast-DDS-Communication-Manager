@@ -36,11 +36,11 @@ using namespace eprosima::fastcdr::exception;
 
 WheelData::WheelData()
 {
-    // m_head com.eprosima.fastdds.idl.parser.typecode.StructTypeCode@6b53e23f
+    // m_head com.eprosima.fastdds.idl.parser.typecode.StructTypeCode@41ee392b
 
-    // m_velocity com.eprosima.idl.parser.typecode.PrimitiveTypeCode@4f9a3314
+    // m_velocity com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1e67a849
     m_velocity = 0.0;
-    // m_distTravelled com.eprosima.idl.parser.typecode.PrimitiveTypeCode@3b2c72c2
+    // m_distTravelled com.eprosima.idl.parser.typecode.PrimitiveTypeCode@57d5872c
     m_distTravelled = 0.0;
 
 }
