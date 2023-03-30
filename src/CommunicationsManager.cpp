@@ -46,7 +46,10 @@ CommunicationManager::~CommunicationManager()
         _publisher->delete_datawriter(i);
 
     for(const auto i : _readers)
+    {
+        i->delete_contained_entities();
         _subscriber->delete_datareader(i);
+    }
 
     _publisher->delete_contained_entities();
     _participant->delete_publisher(_publisher);
