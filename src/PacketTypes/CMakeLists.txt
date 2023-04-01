@@ -9,6 +9,8 @@ GPSPosition.cxx
 GPSPositionPubSubTypes.cxx
 header.cxx
 headerPubSubTypes.cxx
+raceInstructions.cxx
+raceInstructionsPubSubTypes.cxx
 wheelData.cxx
 wheelDataPubSubTypes.cxx
 windSpeed.cxx

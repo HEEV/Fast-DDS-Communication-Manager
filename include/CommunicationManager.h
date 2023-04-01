@@ -1,7 +1,6 @@
 #pragma once
 #include <map>
 #include <string>
-#include <string_view>
 #include <concepts>
 #include <functional>
 #include <thread>
@@ -10,9 +9,9 @@
 #include <condition_variable>
 #include <exception>
 #include <chrono>
+#include <queue>
 #include "PacketTypes/header.h"
 #include "FastDDS.h"
-#include <queue>
 
 /// @brief Registers the topic topicName on the communication manager manager with type type
 /// @param type Type the topic should use
@@ -133,8 +132,8 @@ requires std::copyable<T>
 inline void CommunicationManager::writeData(int writerID, T *data)
 {
     DataContainer d = {writerID, nullptr};
-    d.data = std::malloc(sizeof(&data));
-    std::memcpy(d.data, data, sizeof(&data));
+    d.data = std::malloc(sizeof(*data));
+    std::memcpy(d.data, data, sizeof(*data));
 
     std::unique_lock lck(_writerMux);
     _writerCV.wait(lck, [this](){ return _writerFree; });

@@ -1,0 +1,14 @@
+#include "header.idl"
+
+enum Instruction
+{
+    START_RACE,
+    END_RACE,
+    STOP_COLLECTION
+};
+
+struct RaceInstructions
+{
+    Header head;
+    Instruction inst;
+};

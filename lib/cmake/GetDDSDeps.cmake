@@ -24,6 +24,7 @@ set(foonathan_memory_DIR ${CMAKE_CURRENT_BINARY_DIR}/memory/lib/foonathan_memory
 endif()
 
 message(${foonathan_memory_DIR})
+set(BUILD_SHARED_LIBS OFF)
 set(THIRDPARTY_Asio FORCE CACHE INTERNAL "" FORCE)
 set(THIRDPARTY_fastcdr FORCE CACHE INTERNAL "" FORCE)
 set(THIRDPARTY_TinyXML2 FORCE CACHE INTERNAL "" FORCE)
