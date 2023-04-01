@@ -194,7 +194,9 @@ eprosima::fastdds::dds::DomainParticipant *CommunicationManager::_createClientPa
     Locator_t locator;
     locator.kind = LOCATOR_KIND_TCPv4;
     IPLocator::setLogicalPort(locator, data.port);
-    IPLocator::setPhysicalPort(locator, data.port);
+    srand(time(NULL));
+    uint32_t randPort = rand() % 25565;
+    IPLocator::setPhysicalPort(locator, randPort);
     IPLocator::setIPv4(locator, data.ip);
     remote_server_att.metatrafficUnicastLocatorList.push_back(locator);
 
