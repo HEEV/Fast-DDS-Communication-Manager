@@ -72,7 +72,8 @@ enum Instruction : uint32_t
 {
     START_RACE,
     END_RACE,
-    STOP_COLLECTION
+    STOP_COLLECTION,
+    CONFIRM_RECIEVED
 };
 /*!
  * @brief This class represents the structure RaceInstructions defined by the user in the IDL file.

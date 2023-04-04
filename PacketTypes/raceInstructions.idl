@@ -4,7 +4,8 @@ enum Instruction
 {
     START_RACE,
     END_RACE,
-    STOP_COLLECTION
+    STOP_COLLECTION,
+    CONFIRM_RECIEVED
 };
 
 struct RaceInstructions
