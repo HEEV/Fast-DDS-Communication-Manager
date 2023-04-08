@@ -66,7 +66,9 @@ CommunicationManager::~CommunicationManager()
 int CommunicationManager::addDataWriter(std::string topicName)
 {
     const auto& topic = _topics.at(topicName);
-    auto* writer = _publisher->create_datawriter(topic, DATAWRITER_QOS_DEFAULT);
+    auto qos = DATAWRITER_QOS_DEFAULT;
+    qos.reliability().kind = eprosima::fastdds::dds::RELIABLE_RELIABILITY_QOS;
+    auto* writer = _publisher->create_datawriter(topic, qos);
     _writers.push_back(writer);
     return _writers.size() - 1;
 }
@@ -173,6 +175,7 @@ eprosima::fastdds::dds::DomainParticipant *CommunicationManager::_createServerPa
     tcpTransport->add_listener_port(data.port);
     tcpTransport->set_WAN_address(data.ip);
     server_qos.transport().user_transports.push_back(tcpTransport);
+    tcpTransport->TTL = 10;
     
     return DomainParticipantFactory::get_instance()->create_participant(0, server_qos);
 }
@@ -215,6 +218,7 @@ eprosima::fastdds::dds::DomainParticipant *CommunicationManager::_createClientPa
     std::uniform_int_distribution rdn(49152, 65535);
     tcpTransport->add_listener_port(rdn(gen));
     tcpTransport->wait_for_tcp_negotiation = false;
+    tcpTransport->TTL = 10;
 
     client_qos.transport().user_transports.push_back(tcpTransport);
 
