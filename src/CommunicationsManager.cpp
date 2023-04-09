@@ -66,10 +66,7 @@ CommunicationManager::~CommunicationManager()
 int CommunicationManager::addDataWriter(std::string topicName)
 {
     const auto& topic = _topics.at(topicName);
-    auto qos = DATAWRITER_QOS_DEFAULT;
-    qos.reliability().kind = eprosima::fastdds::dds::RELIABLE_RELIABILITY_QOS;
-    qos.history().kind = eprosima::fastdds::dds::HistoryQosPolicyKind::KEEP_ALL_HISTORY_QOS;
-    auto* writer = _publisher->create_datawriter(topic, qos);
+    auto* writer = _publisher->create_datawriter(topic, DATAWRITER_QOS_DEFAULT);
     _writers.push_back(writer);
     return _writers.size() - 1;
 }

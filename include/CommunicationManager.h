@@ -151,10 +151,7 @@ void CommunicationManager::addDataReader(std::string topicName, std::function<vo
     _readerFree = false;
 
     const auto& topic = _topics.at(topicName);
-    auto qos = eprosima::fastdds::dds::DATAREADER_QOS_DEFAULT;
-    qos.reliability().kind = eprosima::fastdds::dds::RELIABLE_RELIABILITY_QOS;
-    qos.history().kind = eprosima::fastdds::dds::HistoryQosPolicyKind::KEEP_ALL_HISTORY_QOS;
-    auto* reader = _subscriber->create_datareader(topic, qos);
+    auto* reader = _subscriber->create_datareader(topic, eprosima::fastdds::dds::DATAREADER_QOS_DEFAULT);
     _readers.push_back(reader);
 
     auto cb = std::function([callback](void* data)
