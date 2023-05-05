@@ -1,0 +1,31 @@
+name: Create docs
+run-name: Updating docs
+on: [push]
+permissions:
+        contents: write
+jobs:
+        report:
+                name: Create documentation
+                runs-on: ubuntu-latest
+                steps:
+                        - name: Checkout code
+                          uses: actions/checkout@v3
+                          with:
+                                  path: 'code'
+                        - name: Checkout docs
+                          uses: actions/checkout@v3
+                          with:
+                                  ref: 'gh-pages'
+                                  path: 'docs'
+                        - name: Get doxygen
+                          run: sudo apt update && sudo apt install doxygen graphviz
+                        - name: Run doxygen
+                          run: cd /home/runner/work/Fast-DDS-Communication-Manager/Fast-DDS-Communication-Manager/code && doxygen
+                        - name: Push commit
+                          run: |
+                                  cd /home/runner/work/Fast-DDS-Communication-Manager/Fast-DDS-Communication-Manager/docs
+                                  git config --global user.name 'Doc Worker'
+                                  git config --global user.email 'Supermileage@cedarville.edu'
+                                  git stage .
+                                  git commit -m "Automated doc generation" && git push || true
+
