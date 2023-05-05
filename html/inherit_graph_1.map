@@ -1,0 +1,11 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" title=" " alt="" coords="5,175,152,217"/>
+<area shape="rect" id="node2" href="$classBatteryVoltagePubSubType.html" title="This class represents the TopicDataType of the type BatteryVoltage defined by the user in the IDL fil..." alt="" coords="205,5,403,32"/>
+<area shape="rect" id="node3" href="$classCarTiltPubSubType.html" title="This class represents the TopicDataType of the type CarTilt defined by the user in the IDL file." alt="" coords="233,56,375,83"/>
+<area shape="rect" id="node4" href="$classEngineTempPubSubType.html" title="This class represents the TopicDataType of the type EngineTemp defined by the user in the IDL file." alt="" coords="215,107,393,133"/>
+<area shape="rect" id="node5" href="$classGPSPositionPubSubType.html" title="This class represents the TopicDataType of the type GPSPosition defined by the user in the IDL file." alt="" coords="215,157,393,184"/>
+<area shape="rect" id="node6" href="$classHeaderPubSubType.html" title="This class represents the TopicDataType of the type Header defined by the user in the IDL file." alt="" coords="231,208,377,235"/>
+<area shape="rect" id="node7" href="$classRaceInstructionsPubSubType.html" title="This class represents the TopicDataType of the type RaceInstructions defined by the user in the IDL f..." alt="" coords="200,259,408,285"/>
+<area shape="rect" id="node8" href="$classWheelDataPubSubType.html" title="This class represents the TopicDataType of the type WheelData defined by the user in the IDL file." alt="" coords="218,309,390,336"/>
+<area shape="rect" id="node9" href="$classWindSpeedPubSubType.html" title="This class represents the TopicDataType of the type WindSpeed defined by the user in the IDL file." alt="" coords="217,360,391,387"/>
+</map>

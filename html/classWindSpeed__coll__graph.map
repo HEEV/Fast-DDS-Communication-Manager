@@ -1,0 +1,4 @@
+<map id="WindSpeed" name="WindSpeed">
+<area shape="rect" id="node1" title="This class represents the structure WindSpeed defined by the user in the IDL file." alt="" coords="5,95,100,121"/>
+<area shape="rect" id="node2" href="$classHeader.html" title="This class represents the structure Header defined by the user in the IDL file." alt="" coords="18,5,87,32"/>
+</map>

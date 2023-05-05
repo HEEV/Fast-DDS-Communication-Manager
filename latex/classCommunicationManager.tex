@@ -1,0 +1,88 @@
+\hypertarget{classCommunicationManager}{}\doxysection{Communication\+Manager Class Reference}
+\label{classCommunicationManager}\index{CommunicationManager@{CommunicationManager}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classCommunicationManager_ae82938b9201ea7c46edbb961a566077a}\label{classCommunicationManager_ae82938b9201ea7c46edbb961a566077a}} 
+{\bfseries Communication\+Manager} (std\+::string\+\_\+view hostname, bool is\+Server=false)
+\item 
+{\footnotesize template$<$typename T $>$ }\\requires std\+::derived\+\_\+from$<$ T, eprosima\+::fastdds\+::dds\+::\+Topic\+Data\+Type $>$ void \mbox{\hyperlink{classCommunicationManager_ac58276a6196c9696e37f550d8f0862ce}{register\+Topic}} (std\+::string topic\+Name)
+\begin{DoxyCompactList}\small\item\em Register a topic that uses data type T. It is recommended to use the REGISTER\+\_\+\+TYPE\+\_\+\+TO\+\_\+\+MANAGER macro instead of directly using this function. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classCommunicationManager_a48fe2df5d4cb6cb19b25682af76248d4}{add\+Data\+Writer}} (std\+::string topic\+Name)
+\begin{DoxyCompactList}\small\item\em Create a data\+Writer attached to a given topic. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classCommunicationManager_a53c97321fa8ae6c3272e2f9b6f7ff529}\label{classCommunicationManager_a53c97321fa8ae6c3272e2f9b6f7ff529}} 
+{\footnotesize template$<$typename T $>$ }\\requires std\+::copyable$<$ T $>$ void {\bfseries write\+Data} (int writer\+ID, T $\ast$data)
+\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{classCommunicationManager_abce9c7004ecd5cb12ace6f0cfde60b19}{add\+Data\+Reader}} (std\+::string topic\+Name, std\+::function$<$ void(T $\ast$)$>$ callback)
+\begin{DoxyCompactList}\small\item\em Adds a data reader that calls callback when data is recieved on the specified topic. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classCommunicationManager_a5d6441af7f26244c8b3cbd40360425ad}\label{classCommunicationManager_a5d6441af7f26244c8b3cbd40360425ad}} 
+void \mbox{\hyperlink{classCommunicationManager_a5d6441af7f26244c8b3cbd40360425ad}{shutdown}} ()
+\begin{DoxyCompactList}\small\item\em Stop the callback thread. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classCommunicationManager_abce9c7004ecd5cb12ace6f0cfde60b19}\label{classCommunicationManager_abce9c7004ecd5cb12ace6f0cfde60b19}} 
+\index{CommunicationManager@{CommunicationManager}!addDataReader@{addDataReader}}
+\index{addDataReader@{addDataReader}!CommunicationManager@{CommunicationManager}}
+\doxysubsubsection{\texorpdfstring{addDataReader()}{addDataReader()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void Communication\+Manager\+::add\+Data\+Reader (\begin{DoxyParamCaption}\item[{std\+::string}]{topic\+Name,  }\item[{std\+::function$<$ void(T $\ast$)$>$}]{callback }\end{DoxyParamCaption})}
+
+
+
+Adds a data reader that calls callback when data is recieved on the specified topic. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The data type to be recieved \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em topic\+Name} & The name of the topic to listen to \\
+\hline
+{\em callback} & The callback called when data is recieved, It returns void and takes a pointer to T \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classCommunicationManager_a48fe2df5d4cb6cb19b25682af76248d4}\label{classCommunicationManager_a48fe2df5d4cb6cb19b25682af76248d4}} 
+\index{CommunicationManager@{CommunicationManager}!addDataWriter@{addDataWriter}}
+\index{addDataWriter@{addDataWriter}!CommunicationManager@{CommunicationManager}}
+\doxysubsubsection{\texorpdfstring{addDataWriter()}{addDataWriter()}}
+{\footnotesize\ttfamily int Communication\+Manager\+::add\+Data\+Writer (\begin{DoxyParamCaption}\item[{std\+::string}]{topic\+Name }\end{DoxyParamCaption})}
+
+
+
+Create a data\+Writer attached to a given topic. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em topic\+Name} & The topic name to attach the data\+Writer to. Must have been created using register\+Topic(...) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The ID of the created data writer 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCommunicationManager_ac58276a6196c9696e37f550d8f0862ce}\label{classCommunicationManager_ac58276a6196c9696e37f550d8f0862ce}} 
+\index{CommunicationManager@{CommunicationManager}!registerTopic@{registerTopic}}
+\index{registerTopic@{registerTopic}!CommunicationManager@{CommunicationManager}}
+\doxysubsubsection{\texorpdfstring{registerTopic()}{registerTopic()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+requires std\+::derived\+\_\+from$<$ T, eprosima\+::fastdds\+::dds\+::\+Topic\+Data\+Type $>$ void Communication\+Manager\+::register\+Topic (\begin{DoxyParamCaption}\item[{std\+::string}]{topic\+Name }\end{DoxyParamCaption})}
+
+
+
+Register a topic that uses data type T. It is recommended to use the REGISTER\+\_\+\+TYPE\+\_\+\+TO\+\_\+\+MANAGER macro instead of directly using this function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em T} & The data type the topic uses. Must inherit from eprosima\+::fastdds\+::dds\+::\+Topic\+Data\+Type. The name of the data type will end in Pub\+Sub\+Type if generated by fast-\/dds gen \\
+\hline
+{\em topic\+Name} & The name of the topic \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/Communication\+Manager.\+h\item 
+src/Communications\+Manager.\+cpp\end{DoxyCompactItemize}

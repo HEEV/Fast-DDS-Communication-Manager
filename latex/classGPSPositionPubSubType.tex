@@ -1,0 +1,76 @@
+\hypertarget{classGPSPositionPubSubType}{}\doxysection{GPSPosition\+Pub\+Sub\+Type Class Reference}
+\label{classGPSPositionPubSubType}\index{GPSPositionPubSubType@{GPSPositionPubSubType}}
+
+
+This class represents the Topic\+Data\+Type of the type \mbox{\hyperlink{classGPSPosition}{GPSPosition}} defined by the user in the IDL file.  
+
+
+
+
+{\ttfamily \#include $<$GPSPosition\+Pub\+Sub\+Types.\+h$>$}
+
+
+
+Inheritance diagram for GPSPosition\+Pub\+Sub\+Type\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=214pt]{classGPSPositionPubSubType__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for GPSPosition\+Pub\+Sub\+Type\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=214pt]{classGPSPositionPubSubType__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classGPSPositionPubSubType_a0a6eb6f789e113585ac5cd84e0814181}\label{classGPSPositionPubSubType_a0a6eb6f789e113585ac5cd84e0814181}} 
+typedef \mbox{\hyperlink{classGPSPosition}{GPSPosition}} {\bfseries type}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classGPSPositionPubSubType_af3ee0785ece822aadbe6f271ea9657aa}\label{classGPSPositionPubSubType_af3ee0785ece822aadbe6f271ea9657aa}} 
+virtual e\+Prosima\+\_\+user\+\_\+\+Dll\+Export bool {\bfseries serialize} (void $\ast$data, eprosima\+::fastrtps\+::rtps\+::\+Serialized\+Payload\+\_\+t $\ast$payload) override
+\item 
+\mbox{\Hypertarget{classGPSPositionPubSubType_a654f8fc019a4aba48614bf2d146c3b15}\label{classGPSPositionPubSubType_a654f8fc019a4aba48614bf2d146c3b15}} 
+virtual e\+Prosima\+\_\+user\+\_\+\+Dll\+Export bool {\bfseries deserialize} (eprosima\+::fastrtps\+::rtps\+::\+Serialized\+Payload\+\_\+t $\ast$payload, void $\ast$data) override
+\item 
+\mbox{\Hypertarget{classGPSPositionPubSubType_a3b3abf6df25fef14a59c5cd3fbafd212}\label{classGPSPositionPubSubType_a3b3abf6df25fef14a59c5cd3fbafd212}} 
+virtual e\+Prosima\+\_\+user\+\_\+\+Dll\+Export std\+::function$<$ uint32\+\_\+t()$>$ {\bfseries get\+Serialized\+Size\+Provider} (void $\ast$data) override
+\item 
+\mbox{\Hypertarget{classGPSPositionPubSubType_a3a5177bf744fa27af9fc3d9ee7824af2}\label{classGPSPositionPubSubType_a3a5177bf744fa27af9fc3d9ee7824af2}} 
+virtual e\+Prosima\+\_\+user\+\_\+\+Dll\+Export bool {\bfseries get\+Key} (void $\ast$data, eprosima\+::fastrtps\+::rtps\+::\+Instance\+Handle\+\_\+t $\ast$ihandle, bool force\+\_\+md5=false) override
+\item 
+\mbox{\Hypertarget{classGPSPositionPubSubType_ade0df87360c33d082b949960e547b445}\label{classGPSPositionPubSubType_ade0df87360c33d082b949960e547b445}} 
+virtual e\+Prosima\+\_\+user\+\_\+\+Dll\+Export void $\ast$ {\bfseries create\+Data} () override
+\item 
+\mbox{\Hypertarget{classGPSPositionPubSubType_a782a7e4a737b2f48df6849df9387174b}\label{classGPSPositionPubSubType_a782a7e4a737b2f48df6849df9387174b}} 
+virtual e\+Prosima\+\_\+user\+\_\+\+Dll\+Export void {\bfseries delete\+Data} (void $\ast$data) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classGPSPositionPubSubType_a59b3787ca5d245540019f7557d6486e9}\label{classGPSPositionPubSubType_a59b3787ca5d245540019f7557d6486e9}} 
+MD5 {\bfseries m\+\_\+md5}
+\item 
+\mbox{\Hypertarget{classGPSPositionPubSubType_a1b395ee3e5497724eef118e2f8b7dd5a}\label{classGPSPositionPubSubType_a1b395ee3e5497724eef118e2f8b7dd5a}} 
+unsigned char $\ast$ {\bfseries m\+\_\+key\+Buffer}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class represents the Topic\+Data\+Type of the type \mbox{\hyperlink{classGPSPosition}{GPSPosition}} defined by the user in the IDL file. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\+Packet\+Types/\mbox{\hyperlink{GPSPositionPubSubTypes_8h}{GPSPosition\+Pub\+Sub\+Types.\+h}}\item 
+src/\+Packet\+Types/GPSPosition\+Pub\+Sub\+Types.\+cxx\end{DoxyCompactItemize}

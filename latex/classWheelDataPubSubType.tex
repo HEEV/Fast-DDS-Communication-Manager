@@ -1,0 +1,76 @@
+\hypertarget{classWheelDataPubSubType}{}\doxysection{Wheel\+Data\+Pub\+Sub\+Type Class Reference}
+\label{classWheelDataPubSubType}\index{WheelDataPubSubType@{WheelDataPubSubType}}
+
+
+This class represents the Topic\+Data\+Type of the type \mbox{\hyperlink{classWheelData}{Wheel\+Data}} defined by the user in the IDL file.  
+
+
+
+
+{\ttfamily \#include $<$wheel\+Data\+Pub\+Sub\+Types.\+h$>$}
+
+
+
+Inheritance diagram for Wheel\+Data\+Pub\+Sub\+Type\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=209pt]{classWheelDataPubSubType__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Wheel\+Data\+Pub\+Sub\+Type\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=209pt]{classWheelDataPubSubType__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classWheelDataPubSubType_a9e3051560b3c418278073fa8f3f6929b}\label{classWheelDataPubSubType_a9e3051560b3c418278073fa8f3f6929b}} 
+typedef \mbox{\hyperlink{classWheelData}{Wheel\+Data}} {\bfseries type}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classWheelDataPubSubType_a748fc84a88e352ce2b495a753d0a63e2}\label{classWheelDataPubSubType_a748fc84a88e352ce2b495a753d0a63e2}} 
+virtual e\+Prosima\+\_\+user\+\_\+\+Dll\+Export bool {\bfseries serialize} (void $\ast$data, eprosima\+::fastrtps\+::rtps\+::\+Serialized\+Payload\+\_\+t $\ast$payload) override
+\item 
+\mbox{\Hypertarget{classWheelDataPubSubType_a30ceb14c29540fc0715df0ab4a82df16}\label{classWheelDataPubSubType_a30ceb14c29540fc0715df0ab4a82df16}} 
+virtual e\+Prosima\+\_\+user\+\_\+\+Dll\+Export bool {\bfseries deserialize} (eprosima\+::fastrtps\+::rtps\+::\+Serialized\+Payload\+\_\+t $\ast$payload, void $\ast$data) override
+\item 
+\mbox{\Hypertarget{classWheelDataPubSubType_a07ecd69a72aa99724b0eb0b21507cf82}\label{classWheelDataPubSubType_a07ecd69a72aa99724b0eb0b21507cf82}} 
+virtual e\+Prosima\+\_\+user\+\_\+\+Dll\+Export std\+::function$<$ uint32\+\_\+t()$>$ {\bfseries get\+Serialized\+Size\+Provider} (void $\ast$data) override
+\item 
+\mbox{\Hypertarget{classWheelDataPubSubType_abc2e72c62d556f61a0b11fa37d77240f}\label{classWheelDataPubSubType_abc2e72c62d556f61a0b11fa37d77240f}} 
+virtual e\+Prosima\+\_\+user\+\_\+\+Dll\+Export bool {\bfseries get\+Key} (void $\ast$data, eprosima\+::fastrtps\+::rtps\+::\+Instance\+Handle\+\_\+t $\ast$ihandle, bool force\+\_\+md5=false) override
+\item 
+\mbox{\Hypertarget{classWheelDataPubSubType_aa2cd0b8a85eab74720795d1e0b1dd25b}\label{classWheelDataPubSubType_aa2cd0b8a85eab74720795d1e0b1dd25b}} 
+virtual e\+Prosima\+\_\+user\+\_\+\+Dll\+Export void $\ast$ {\bfseries create\+Data} () override
+\item 
+\mbox{\Hypertarget{classWheelDataPubSubType_ad9f9d015378d11f76d511e6dc6594b56}\label{classWheelDataPubSubType_ad9f9d015378d11f76d511e6dc6594b56}} 
+virtual e\+Prosima\+\_\+user\+\_\+\+Dll\+Export void {\bfseries delete\+Data} (void $\ast$data) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classWheelDataPubSubType_a7b4bf686eaa76ba293645394bf9c028b}\label{classWheelDataPubSubType_a7b4bf686eaa76ba293645394bf9c028b}} 
+MD5 {\bfseries m\+\_\+md5}
+\item 
+\mbox{\Hypertarget{classWheelDataPubSubType_a1ad77f60615e2772279d418f5d6dde03}\label{classWheelDataPubSubType_a1ad77f60615e2772279d418f5d6dde03}} 
+unsigned char $\ast$ {\bfseries m\+\_\+key\+Buffer}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class represents the Topic\+Data\+Type of the type \mbox{\hyperlink{classWheelData}{Wheel\+Data}} defined by the user in the IDL file. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\+Packet\+Types/\mbox{\hyperlink{wheelDataPubSubTypes_8h}{wheel\+Data\+Pub\+Sub\+Types.\+h}}\item 
+src/\+Packet\+Types/wheel\+Data\+Pub\+Sub\+Types.\+cxx\end{DoxyCompactItemize}

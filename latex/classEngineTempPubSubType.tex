@@ -1,0 +1,76 @@
+\hypertarget{classEngineTempPubSubType}{}\doxysection{Engine\+Temp\+Pub\+Sub\+Type Class Reference}
+\label{classEngineTempPubSubType}\index{EngineTempPubSubType@{EngineTempPubSubType}}
+
+
+This class represents the Topic\+Data\+Type of the type \mbox{\hyperlink{classEngineTemp}{Engine\+Temp}} defined by the user in the IDL file.  
+
+
+
+
+{\ttfamily \#include $<$engine\+Temp\+Pub\+Sub\+Types.\+h$>$}
+
+
+
+Inheritance diagram for Engine\+Temp\+Pub\+Sub\+Type\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=214pt]{classEngineTempPubSubType__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Engine\+Temp\+Pub\+Sub\+Type\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=214pt]{classEngineTempPubSubType__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classEngineTempPubSubType_a43a4928e859e3ae4c2d2e2d6c8f257ce}\label{classEngineTempPubSubType_a43a4928e859e3ae4c2d2e2d6c8f257ce}} 
+typedef \mbox{\hyperlink{classEngineTemp}{Engine\+Temp}} {\bfseries type}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classEngineTempPubSubType_a9c3895d7536e3c79fb0af31f0a97352d}\label{classEngineTempPubSubType_a9c3895d7536e3c79fb0af31f0a97352d}} 
+virtual e\+Prosima\+\_\+user\+\_\+\+Dll\+Export bool {\bfseries serialize} (void $\ast$data, eprosima\+::fastrtps\+::rtps\+::\+Serialized\+Payload\+\_\+t $\ast$payload) override
+\item 
+\mbox{\Hypertarget{classEngineTempPubSubType_a024c526ae7de3a62433617553a86639c}\label{classEngineTempPubSubType_a024c526ae7de3a62433617553a86639c}} 
+virtual e\+Prosima\+\_\+user\+\_\+\+Dll\+Export bool {\bfseries deserialize} (eprosima\+::fastrtps\+::rtps\+::\+Serialized\+Payload\+\_\+t $\ast$payload, void $\ast$data) override
+\item 
+\mbox{\Hypertarget{classEngineTempPubSubType_a88097d2d5cf9cb0537d8006c334edda5}\label{classEngineTempPubSubType_a88097d2d5cf9cb0537d8006c334edda5}} 
+virtual e\+Prosima\+\_\+user\+\_\+\+Dll\+Export std\+::function$<$ uint32\+\_\+t()$>$ {\bfseries get\+Serialized\+Size\+Provider} (void $\ast$data) override
+\item 
+\mbox{\Hypertarget{classEngineTempPubSubType_a168dfcb13d722e9392fafbc243e04275}\label{classEngineTempPubSubType_a168dfcb13d722e9392fafbc243e04275}} 
+virtual e\+Prosima\+\_\+user\+\_\+\+Dll\+Export bool {\bfseries get\+Key} (void $\ast$data, eprosima\+::fastrtps\+::rtps\+::\+Instance\+Handle\+\_\+t $\ast$ihandle, bool force\+\_\+md5=false) override
+\item 
+\mbox{\Hypertarget{classEngineTempPubSubType_aa524d0c9edb8f299a3b1f7a60243e879}\label{classEngineTempPubSubType_aa524d0c9edb8f299a3b1f7a60243e879}} 
+virtual e\+Prosima\+\_\+user\+\_\+\+Dll\+Export void $\ast$ {\bfseries create\+Data} () override
+\item 
+\mbox{\Hypertarget{classEngineTempPubSubType_a3d46df0bf8625182654e4d83082ceb39}\label{classEngineTempPubSubType_a3d46df0bf8625182654e4d83082ceb39}} 
+virtual e\+Prosima\+\_\+user\+\_\+\+Dll\+Export void {\bfseries delete\+Data} (void $\ast$data) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classEngineTempPubSubType_a3310164116da06ccc8f50767ca908cbc}\label{classEngineTempPubSubType_a3310164116da06ccc8f50767ca908cbc}} 
+MD5 {\bfseries m\+\_\+md5}
+\item 
+\mbox{\Hypertarget{classEngineTempPubSubType_adbeb17f7a1ae0484b3385282ad0c9932}\label{classEngineTempPubSubType_adbeb17f7a1ae0484b3385282ad0c9932}} 
+unsigned char $\ast$ {\bfseries m\+\_\+key\+Buffer}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class represents the Topic\+Data\+Type of the type \mbox{\hyperlink{classEngineTemp}{Engine\+Temp}} defined by the user in the IDL file. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\+Packet\+Types/\mbox{\hyperlink{engineTempPubSubTypes_8h}{engine\+Temp\+Pub\+Sub\+Types.\+h}}\item 
+src/\+Packet\+Types/engine\+Temp\+Pub\+Sub\+Types.\+cxx\end{DoxyCompactItemize}

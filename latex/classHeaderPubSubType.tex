@@ -1,0 +1,76 @@
+\hypertarget{classHeaderPubSubType}{}\doxysection{Header\+Pub\+Sub\+Type Class Reference}
+\label{classHeaderPubSubType}\index{HeaderPubSubType@{HeaderPubSubType}}
+
+
+This class represents the Topic\+Data\+Type of the type \mbox{\hyperlink{classHeader}{Header}} defined by the user in the IDL file.  
+
+
+
+
+{\ttfamily \#include $<$header\+Pub\+Sub\+Types.\+h$>$}
+
+
+
+Inheritance diagram for Header\+Pub\+Sub\+Type\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=190pt]{classHeaderPubSubType__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Header\+Pub\+Sub\+Type\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=190pt]{classHeaderPubSubType__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classHeaderPubSubType_a8210da966630c23c4b056781a003841f}\label{classHeaderPubSubType_a8210da966630c23c4b056781a003841f}} 
+typedef \mbox{\hyperlink{classHeader}{Header}} {\bfseries type}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classHeaderPubSubType_aa7025bf2a837a98eee48618c23a28294}\label{classHeaderPubSubType_aa7025bf2a837a98eee48618c23a28294}} 
+virtual e\+Prosima\+\_\+user\+\_\+\+Dll\+Export bool {\bfseries serialize} (void $\ast$data, eprosima\+::fastrtps\+::rtps\+::\+Serialized\+Payload\+\_\+t $\ast$payload) override
+\item 
+\mbox{\Hypertarget{classHeaderPubSubType_aa71efec939d2bca724172a0ec2f5854a}\label{classHeaderPubSubType_aa71efec939d2bca724172a0ec2f5854a}} 
+virtual e\+Prosima\+\_\+user\+\_\+\+Dll\+Export bool {\bfseries deserialize} (eprosima\+::fastrtps\+::rtps\+::\+Serialized\+Payload\+\_\+t $\ast$payload, void $\ast$data) override
+\item 
+\mbox{\Hypertarget{classHeaderPubSubType_ab87f096f50de64fe02d7f81ebca972a1}\label{classHeaderPubSubType_ab87f096f50de64fe02d7f81ebca972a1}} 
+virtual e\+Prosima\+\_\+user\+\_\+\+Dll\+Export std\+::function$<$ uint32\+\_\+t()$>$ {\bfseries get\+Serialized\+Size\+Provider} (void $\ast$data) override
+\item 
+\mbox{\Hypertarget{classHeaderPubSubType_a265f3ef2f837710dc7c24822afe45a21}\label{classHeaderPubSubType_a265f3ef2f837710dc7c24822afe45a21}} 
+virtual e\+Prosima\+\_\+user\+\_\+\+Dll\+Export bool {\bfseries get\+Key} (void $\ast$data, eprosima\+::fastrtps\+::rtps\+::\+Instance\+Handle\+\_\+t $\ast$ihandle, bool force\+\_\+md5=false) override
+\item 
+\mbox{\Hypertarget{classHeaderPubSubType_ac3b4c09990124164339f612b655a712f}\label{classHeaderPubSubType_ac3b4c09990124164339f612b655a712f}} 
+virtual e\+Prosima\+\_\+user\+\_\+\+Dll\+Export void $\ast$ {\bfseries create\+Data} () override
+\item 
+\mbox{\Hypertarget{classHeaderPubSubType_aa1509712bb274290faa8cbab7fca80e0}\label{classHeaderPubSubType_aa1509712bb274290faa8cbab7fca80e0}} 
+virtual e\+Prosima\+\_\+user\+\_\+\+Dll\+Export void {\bfseries delete\+Data} (void $\ast$data) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classHeaderPubSubType_a5b7b34c9cdcea4ac6be649068847da34}\label{classHeaderPubSubType_a5b7b34c9cdcea4ac6be649068847da34}} 
+MD5 {\bfseries m\+\_\+md5}
+\item 
+\mbox{\Hypertarget{classHeaderPubSubType_ab3c3068108098fc32141d2d237d0c87c}\label{classHeaderPubSubType_ab3c3068108098fc32141d2d237d0c87c}} 
+unsigned char $\ast$ {\bfseries m\+\_\+key\+Buffer}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class represents the Topic\+Data\+Type of the type \mbox{\hyperlink{classHeader}{Header}} defined by the user in the IDL file. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\+Packet\+Types/\mbox{\hyperlink{headerPubSubTypes_8h}{header\+Pub\+Sub\+Types.\+h}}\item 
+src/\+Packet\+Types/header\+Pub\+Sub\+Types.\+cxx\end{DoxyCompactItemize}

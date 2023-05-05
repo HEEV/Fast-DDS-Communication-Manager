@@ -1,0 +1,76 @@
+\hypertarget{classCarTiltPubSubType}{}\doxysection{Car\+Tilt\+Pub\+Sub\+Type Class Reference}
+\label{classCarTiltPubSubType}\index{CarTiltPubSubType@{CarTiltPubSubType}}
+
+
+This class represents the Topic\+Data\+Type of the type \mbox{\hyperlink{classCarTilt}{Car\+Tilt}} defined by the user in the IDL file.  
+
+
+
+
+{\ttfamily \#include $<$car\+Tilt\+Pub\+Sub\+Types.\+h$>$}
+
+
+
+Inheritance diagram for Car\+Tilt\+Pub\+Sub\+Type\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=190pt]{classCarTiltPubSubType__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Car\+Tilt\+Pub\+Sub\+Type\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=190pt]{classCarTiltPubSubType__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classCarTiltPubSubType_ab6197a14b8022a690b892ef40e5e58df}\label{classCarTiltPubSubType_ab6197a14b8022a690b892ef40e5e58df}} 
+typedef \mbox{\hyperlink{classCarTilt}{Car\+Tilt}} {\bfseries type}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classCarTiltPubSubType_a8102e75d13137167b35dad453a3a6cac}\label{classCarTiltPubSubType_a8102e75d13137167b35dad453a3a6cac}} 
+virtual e\+Prosima\+\_\+user\+\_\+\+Dll\+Export bool {\bfseries serialize} (void $\ast$data, eprosima\+::fastrtps\+::rtps\+::\+Serialized\+Payload\+\_\+t $\ast$payload) override
+\item 
+\mbox{\Hypertarget{classCarTiltPubSubType_a8ee3961a922baeb81a9234220729729b}\label{classCarTiltPubSubType_a8ee3961a922baeb81a9234220729729b}} 
+virtual e\+Prosima\+\_\+user\+\_\+\+Dll\+Export bool {\bfseries deserialize} (eprosima\+::fastrtps\+::rtps\+::\+Serialized\+Payload\+\_\+t $\ast$payload, void $\ast$data) override
+\item 
+\mbox{\Hypertarget{classCarTiltPubSubType_aecf47bb099fd76e952dd7eabf552964c}\label{classCarTiltPubSubType_aecf47bb099fd76e952dd7eabf552964c}} 
+virtual e\+Prosima\+\_\+user\+\_\+\+Dll\+Export std\+::function$<$ uint32\+\_\+t()$>$ {\bfseries get\+Serialized\+Size\+Provider} (void $\ast$data) override
+\item 
+\mbox{\Hypertarget{classCarTiltPubSubType_a169a2bceeb74a9f72dc3c843c0246211}\label{classCarTiltPubSubType_a169a2bceeb74a9f72dc3c843c0246211}} 
+virtual e\+Prosima\+\_\+user\+\_\+\+Dll\+Export bool {\bfseries get\+Key} (void $\ast$data, eprosima\+::fastrtps\+::rtps\+::\+Instance\+Handle\+\_\+t $\ast$ihandle, bool force\+\_\+md5=false) override
+\item 
+\mbox{\Hypertarget{classCarTiltPubSubType_a58d0d73488d498ec55160f5d2ad6e012}\label{classCarTiltPubSubType_a58d0d73488d498ec55160f5d2ad6e012}} 
+virtual e\+Prosima\+\_\+user\+\_\+\+Dll\+Export void $\ast$ {\bfseries create\+Data} () override
+\item 
+\mbox{\Hypertarget{classCarTiltPubSubType_a3f78a49c256678888df85928cf550476}\label{classCarTiltPubSubType_a3f78a49c256678888df85928cf550476}} 
+virtual e\+Prosima\+\_\+user\+\_\+\+Dll\+Export void {\bfseries delete\+Data} (void $\ast$data) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classCarTiltPubSubType_a7954ab0011277ecc2a3394853a7dfbf5}\label{classCarTiltPubSubType_a7954ab0011277ecc2a3394853a7dfbf5}} 
+MD5 {\bfseries m\+\_\+md5}
+\item 
+\mbox{\Hypertarget{classCarTiltPubSubType_a29a2e705a4887d3812659c22cf07dc28}\label{classCarTiltPubSubType_a29a2e705a4887d3812659c22cf07dc28}} 
+unsigned char $\ast$ {\bfseries m\+\_\+key\+Buffer}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class represents the Topic\+Data\+Type of the type \mbox{\hyperlink{classCarTilt}{Car\+Tilt}} defined by the user in the IDL file. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\+Packet\+Types/\mbox{\hyperlink{carTiltPubSubTypes_8h}{car\+Tilt\+Pub\+Sub\+Types.\+h}}\item 
+src/\+Packet\+Types/car\+Tilt\+Pub\+Sub\+Types.\+cxx\end{DoxyCompactItemize}

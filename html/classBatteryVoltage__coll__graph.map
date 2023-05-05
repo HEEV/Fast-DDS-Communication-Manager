@@ -1,0 +1,4 @@
+<map id="BatteryVoltage" name="BatteryVoltage">
+<area shape="rect" id="node1" title="This class represents the structure BatteryVoltage defined by the user in the IDL file." alt="" coords="5,95,124,121"/>
+<area shape="rect" id="node2" href="$classHeader.html" title="This class represents the structure Header defined by the user in the IDL file." alt="" coords="30,5,99,32"/>
+</map>
