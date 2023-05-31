@@ -97,6 +97,7 @@ private:
     eprosima::fastdds::dds::DomainParticipant* _createServerParticipant(std::string_view hostname);
     eprosima::fastdds::dds::DomainParticipant* _createClientParticipant(std::string_view hostname);
     IPData _parseIP(std::string_view hostname);
+    std::string _getExternalIP();
     void _writeWorker();
 
 };
@@ -105,6 +106,12 @@ class HostnameException : public std::runtime_error
 {
 public:
     HostnameException(const std::string& what) : std::runtime_error(what) {}
+};
+
+class ExternalIPException : public std::runtime_error
+{
+    public:
+        ExternalIPException(const std::string& what) : std::runtime_error(what) {}
 };
 
 template <typename T>
