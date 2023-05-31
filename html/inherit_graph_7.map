@@ -1,4 +1,3 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,144,32"/>
-<area shape="rect" id="node2" href="$classHostnameException.html" title=" " alt="" coords="192,5,345,32"/>
+<area shape="rect" id="node1" href="$classHeader.html" title="This class represents the structure Header defined by the user in the IDL file." alt="" coords="5,5,75,32"/>
 </map>
