@@ -216,7 +216,6 @@ eprosima::fastdds::dds::DomainParticipant *CommunicationManager::_createClientPa
     std::default_random_engine gen(time(NULL));
     std::uniform_int_distribution rdn(49152, 65535);
     tcpTransport->add_listener_port(rdn(gen));
-    tcpTransport->set_WAN_address(_getExternalIP());
     tcpTransport->wait_for_tcp_negotiation = false;
     tcpTransport->TTL = 10;
 
